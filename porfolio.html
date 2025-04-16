@@ -209,7 +209,7 @@
 </nav>
 
 <!-- Section Hero avec effet Vanta.js -->
-<section id="accueil" class="section-container relative h-screen flex flex-col justify-center items-center text-center  ">
+<section id="accueil" class="section-container relative h-screen flex flex-col justify-center items-center text-center">
   <div class="z-10 hidden-element">
     <p class="font-cinzel text-xl mb-2">Bonjour, je suis</p>
     <h1 class="font-cinzel text-5xl md:text-6xl font-semibold text-gold mb-2 drop-shadow-lg">Yanis Benaalma</h1>
@@ -225,7 +225,6 @@
       <p class="flex items-center"><i class="fas fa-phone text-gold mr-2"></i> 06-14-74-40-20</p>
     </div>
   </div>
-
 </section>
 
 <!-- Section À propos -->
@@ -327,8 +326,9 @@
             <span class="text-xs bg-gold/10 text-gold px-2 py-1 border border-gold/20">CSS</span>
             <span class="text-xs bg-gold/10 text-gold px-2 py-1 border border-gold/20">JavaScript</span>
           </div>
-          <a href=" https://yanisbenour36.github.io/minuteur.github.io/" class="mt-auto text-center py-2 border border-gold text-text-color hover:bg-gold/10 hover:text-gold transition-colors duration-300 show-modal"> <button >
-      Voir le site</button></a>
+          <a href="https://yanisbenour36.github.io/minuteur.github.io/" class="mt-auto text-center py-2 border border-gold text-text-color hover:bg-gold/10 hover:text-gold transition-colors duration-300">
+            <button>Voir le Projet</button>
+          </a>
         </div>
       </div>
 
@@ -342,7 +342,9 @@
             <span class="text-xs bg-gold/10 text-gold px-2 py-1 border border-gold/20">CSS</span>
             <span class="text-xs bg-gold/10 text-gold px-2 py-1 border border-gold/20">JavaScript</span>
           </div>
-          <a href="https://yanisbenour36.github.io/citation1.github.io/"class="mt-auto text-center py-2 border border-gold text-text-color hover:bg-gold/10 hover:text-gold transition-colors duration-300 show-modal"><button >Voir le site</button></a>
+          <a href="https://yanisbenour36.github.io/citation1.github.io/" class="mt-auto text-center py-2 border border-gold text-text-color hover:bg-gold/10 hover:text-gold transition-colors duration-300">
+            <button>Voir le Projet</button>
+          </a>
         </div>
       </div>
 
@@ -358,7 +360,9 @@
             <span class="text-xs bg-gold/10 text-gold px-2 py-1 border border-gold/20">PHP</span>
             <span class="text-xs bg-gold/10 text-gold px-2 py-1 border border-gold/20">SQL</span>
           </div>
-          <a href="https://yanisbenour36.github.io/todolist/" class="mt-auto text-center py-2 border border-gold text-text-color hover:bg-gold/10 hover:text-gold transition-colors duration-300 show-modal"> <button  >Voir le site</button></a>
+          <a href="https://yanisbenour36.github.io/todolist/" class="mt-auto text-center py-2 border border-gold text-text-color hover:bg-gold/10 hover:text-gold transition-colors duration-300">
+            <button>Voir le Projet</button>
+          </a>
         </div>
       </div>
 
@@ -374,7 +378,7 @@
             <span class="text-xs bg-gold/10 text-gold px-2 py-1 border border-gold/20">PHP</span>
             <span class="text-xs bg-gold/10 text-gold px-2 py-1 border border-gold/20">SQL</span>
           </div>
-          <button class="mt-auto text-center py-2 border border-gold text-text-color hover:bg-gold/10 hover:text-gold transition-colors duration-300 show-modal" data-modal="modal-projet-5">Voir le site sous forme de maquette</button>
+          <button class="mt-auto text-center py-2 border border-gold text-text-color hover:bg-gold/10 hover:text-gold transition-colors duration-300 show-modal" data-modal="modal-projet-5">Voir le Projet</button>
         </div>
       </div>
     </div>
@@ -449,10 +453,6 @@
   </div>
 </footer>
 
-
-
-
-
 <div id="modal-projet-5" class="modal">
   <div class="modal-content">
     <span class="close-modal">&times;</span>
@@ -461,7 +461,7 @@
     <!-- Grille de 4 images -->
     <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
       <div class="overflow-hidden border-2 border-gold/30">
-        <img src="img/acceui.jpg"alt="CMS - Page d'accueil" class="w-full h-auto hover:scale-105 transition-transform duration-300">
+        <img src="img/acceui.jpg" alt="CMS - Page d'accueil" class="w-full h-auto hover:scale-105 transition-transform duration-300">
         <p class="text-center py-2 bg-dark-bg/80 text-gold">Page d'accueil</p>
       </div>
       <div class="overflow-hidden border-2 border-gold/30">
@@ -469,7 +469,7 @@
         <p class="text-center py-2 bg-dark-bg/80 text-gold">Tableau de bord</p>
       </div>
       <div class="overflow-hidden border-2 border-gold/30">
-        <img  src="img/gestion%20des%20article.png" alt="CMS - Éditeur d'articles" class="w-full h-auto hover:scale-105 transition-transform duration-300">
+        <img src="img/gestion%20des%20article.png" alt="CMS - Éditeur d'articles" class="w-full h-auto hover:scale-105 transition-transform duration-300">
         <p class="text-center py-2 bg-dark-bg/80 text-gold">Gestion d'articles</p>
       </div>
       <div class="overflow-hidden border-2 border-gold/30">
@@ -530,6 +530,20 @@
       burger.classList.toggle('toggle');
     });
 
+    // Fermeture du menu mobile lors du clic sur un lien
+    navLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        if (nav.classList.contains('nav-active')) {
+          nav.classList.remove('nav-active');
+          burger.classList.remove('toggle');
+
+          navLinks.forEach(link => {
+            link.style.animation = '';
+          });
+        }
+      });
+    });
+
     // Animation au défilement
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
@@ -564,8 +578,10 @@
       button.addEventListener('click', () => {
         const modalId = button.getAttribute('data-modal');
         const modal = document.getElementById(modalId);
-        modal.classList.add('show');
-        document.body.style.overflow = 'hidden'; // Empêcher le défilement
+        if (modal) {
+          modal.classList.add('show');
+          document.body.style.overflow = 'hidden'; // Empêcher le défilement
+        }
       });
     });
 
