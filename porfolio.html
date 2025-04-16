@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Yanis Benaalma | Développeur Web</title>
+
+  <!-- Polices Google -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+
+  <!-- Scripts pour Vanta.js (conservés de votre code) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.birds.min.js"></script>
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            gold: '#c0a080',
+            'gold-light': 'rgba(192, 160, 128, 0.3)',
+            'gold-dark': '#573c00',
+            'dark-bg': '#0a0a0a',
+            'dark-bg-light': 'rgba(20, 20, 20, 0.8)',
+            'dark-bg-lighter': 'rgba(20, 20, 20, 0.9)',
+            'text-color': '#e0d6c2'
+          },
+          fontFamily: {
+            'cinzel': ['Cinzel', 'serif'],
+            'raleway': ['Raleway', 'sans-serif']
+          },
+          keyframes: {
+            fadeIn: {
+              '0%': { opacity: '0', transform: 'translateY(20px)' },
+              '100%': { opacity: '1', transform: 'translateY(0)' }
+            },
+            scaleIn: {
+              '0%': { opacity: '0', transform: 'scale(0.9)' },
+              '100%': { opacity: '1', transform: 'scale(1)' }
+            }
+          },
+          animation: {
+            'fade-in': 'fadeIn 0.8s ease-out forwards',
+            'scale-in': 'scaleIn 0.8s ease-out forwards'
+          }
+        }
+      }
+    }
+  </script>
+
+  <style type="text/tailwindcss">
+    @layer utilities {
+      .progress-circular {
+        position: relative;
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        background: conic-gradient(#c0a080 calc(var(--percentage) * 1%), #333 0);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .progress-circular::before {
+        content: "";
+        position: absolute;
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        background-color: #0a0a0a;
+      }
+
+      .progress-label {
+        position: relative;
+        color: #e0d6c2;
+        font-weight: bold;
+      }
+
+      .nav-active {
+        transform: translateX(0%) !important;
+      }
+
+      .toggle .line1 {
+        transform: rotate(-45deg) translate(-5px, 6px);
+      }
+
+      .toggle .line2 {
+        opacity: 0;
+      }
+
+      .toggle .line3 {
+        transform: rotate(45deg) translate(-5px, -6px);
+      }
+
+      @keyframes navLinkFade {
+        from {
+          opacity: 0;
+          transform: translateX(50px);
+        }
+        to {
+          opacity: 1;
+          transform: translateX(0);
+        }
+      }
+
+      .section-container {
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+
+      .hidden-element {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+
+      .fade-in {
+        animation: fadeIn 0.8s ease-out forwards;
+      }
+
+      .modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.8);
+        z-index: 100;
+        overflow: auto;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+      }
+
+      .modal.show {
+        display: flex;
+        opacity: 1;
+      }
+
+      .modal-content {
+        background-color: #0a0a0a;
+        margin: auto;
+        padding: 20px;
+        border: 2px solid #c0a080;
+        width: 80%;
+        max-width: 800px;
+        position: relative;
+        transform: scale(0.9);
+        transition: transform 0.3s ease;
+      }
+
+      .modal.show .modal-content {
+        transform: scale(1);
+      }
+
+      .close-modal {
+        position: absolute;
+        top: 10px;
+        right: 15px;
+        color: #c0a080;
+        font-size: 28px;
+        font-weight: bold;
+        cursor: pointer;
+      }
+
+      .footer {
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+
+<body class="bg-dark-bg text-text-color font-raleway">
+<!-- Navigation -->
+<nav class="fixed top-0 w-full bg-dark-bg-lighter bg-opacity-90 z-50 border-b border-gold">
+  <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+    <div class="text-3xl font-cinzel text-gold">YB</div>
+    <ul class="nav-links hidden md:flex space-x-8 transition-transform duration-500 ease-in">
+      <li><a href="#accueil" class="font-cinzel hover:text-gold transition-colors duration-300">Accueil</a></li>
+      <li><a href="#a-propos" class="font-cinzel hover:text-gold transition-colors duration-300">À propos</a></li>
+      <li><a href="#competences" class="font-cinzel hover:text-gold transition-colors duration-300">Compétences</a></li>
+      <li><a href="#projets" class="font-cinzel hover:text-gold transition-colors duration-300">Projets</a></li>
+      <li><a href="#contact" class="font-cinzel hover:text-gold transition-colors duration-300">Contact</a></li>
+    </ul>
+
+    <!-- Version mobile du menu -->
+    <ul class="nav-links md:hidden absolute right-0 h-[92vh] top-[8vh] bg-dark-bg bg-opacity-95 flex flex-col items-center w-1/2 transform translate-x-full transition-transform duration-500 ease-in z-50 border-l border-gold">
+      <li class="my-5 opacity-0"><a href="#accueil" class="font-cinzel hover:text-gold transition-colors duration-300">Accueil</a></li>
+      <li class="my-5 opacity-0"><a href="#a-propos" class="font-cinzel hover:text-gold transition-colors duration-300">À propos</a></li>
+      <li class="my-5 opacity-0"><a href="#competences" class="font-cinzel hover:text-gold transition-colors duration-300">Compétences</a></li>
+      <li class="my-5 opacity-0"><a href="#projets" class="font-cinzel hover:text-gold transition-colors duration-300">Projets</a></li>
+      <li class="my-5 opacity-0"><a href="#contact" class="font-cinzel hover:text-gold transition-colors duration-300">Contact</a></li>
+    </ul>
+
+    <div class="burger md:hidden cursor-pointer">
+      <div class="line1 w-6 h-0.5 bg-text-color my-1.5 transition-all duration-300"></div>
+      <div class="line2 w-6 h-0.5 bg-text-color my-1.5 transition-all duration-300"></div>
+      <div class="line3 w-6 h-0.5 bg-text-color my-1.5 transition-all duration-300"></div>
+    </div>
+  </div>
+</nav>
+
+<!-- Section Hero avec effet Vanta.js -->
+<section id="accueil" class="section-container relative h-screen flex flex-col justify-center items-center text-center  ">
+  <div class="z-10 hidden-element">
+    <p class="font-cinzel text-xl mb-2">Bonjour, je suis</p>
+    <h1 class="font-cinzel text-5xl md:text-6xl font-semibold text-gold mb-2 drop-shadow-lg">Yanis Benaalma</h1>
+    <p class="font-cinzel text-2xl mb-8">Développeur Web</p>
+
+    <div class="relative w-48 h-48 mx-auto mb-8 rounded-full border-4 border-gold overflow-hidden shadow-lg shadow-gold/50">
+      <img src="img/pps.png" alt="Yanis Benaalma" class="w-full h-full object-cover">
+    </div>
+
+    <div class="flex flex-col items-center space-y-2">
+      <p class="flex items-center"><i class="fas fa-map-marker-alt text-gold mr-2"></i> Métropole de Rouen</p>
+      <p class="flex items-center"><i class="fas fa-envelope text-gold mr-2"></i> benaalma.yanis@nfs.school</p>
+      <p class="flex items-center"><i class="fas fa-phone text-gold mr-2"></i> 06-14-74-40-20</p>
+    </div>
+  </div>
+
+</section>
+
+<!-- Section À propos -->
+<section id="a-propos" class="section-container py-20 px-4">
+  <div class="max-w-4xl mx-auto bg-dark-bg-light border-l-2 border-r-2 border-gold p-8 md:p-12 shadow-lg hidden-element">
+    <h2 class="font-cinzel text-3xl text-gold text-center mb-12 relative inline-block">
+      À propos de moi
+      <span class="absolute bottom-[-10px] left-1/2 transform -translate-x-1/2 w-24 h-0.5 bg-gold"></span>
+    </h2>
+
+    <div class="max-w-3xl mx-auto text-left space-y-6">
+      <p class="leading-relaxed hidden-element">
+        Développeur web junior en pleine évolution, je suis passionné par la création d'interfaces modernes, fonctionnelles et bien structurées. Curieux, rigoureux et toujours en quête de progression, j'ai à cœur de développer des solutions efficaces et élégantes.
+      </p>
+
+      <p class="leading-relaxed hidden-element">
+        Mon parcours professionnel, d'abord technique dans la chaudronnerie, m'a transmis des qualités essentielles telles que la précision, la patience et le sens du détail. Ces atouts me servent aujourd'hui dans le développement web, où j'apporte une attention particulière à la qualité du code et à l'expérience utilisateur.
+      </p>
+
+      <p class="leading-relaxed hidden-element">
+        Actuellement en formation chez Need for School, je me spécialise dans les technologies du web : HTML, CSS, JavaScript, PHP et SQL. Je m'investis pleinement dans chaque projet, en cultivant une approche à la fois méthodique et créative. Mon objectif est clair : devenir un développeur complet, capable de contribuer activement à des projets concrets et innovants.
+      </p>
+    </div>
+
+    <div class="flex flex-wrap justify-center gap-3 mt-8 hidden-element">
+      <span class="inline-block bg-gold/10 text-gold px-4 py-2 border border-gold/30 font-cinzel text-sm hover:-translate-y-1 transition-transform duration-300">HTML</span>
+      <span class="inline-block bg-gold/10 text-gold px-4 py-2 border border-gold/30 font-cinzel text-sm hover:-translate-y-1 transition-transform duration-300">CSS</span>
+      <span class="inline-block bg-gold/10 text-gold px-4 py-2 border border-gold/30 font-cinzel text-sm hover:-translate-y-1 transition-transform duration-300">JavaScript</span>
+      <span class="inline-block bg-gold/10 text-gold px-4 py-2 border border-gold/30 font-cinzel text-sm hover:-translate-y-1 transition-transform duration-300">PHP</span>
+      <span class="inline-block bg-gold/10 text-gold px-4 py-2 border border-gold/30 font-cinzel text-sm hover:-translate-y-1 transition-transform duration-300">SQL</span>
+      <span class="inline-block bg-gold/10 text-gold px-4 py-2 border border-gold/30 font-cinzel text-sm hover:-translate-y-1 transition-transform duration-300">Responsive Design</span>
+    </div>
+  </div>
+</section>
+
+<!-- Section Compétences -->
+<section id="competences" class="section-container py-20 px-4">
+  <div class="max-w-4xl mx-auto bg-dark-bg-light border-t-2 border-b-2 border-gold p-8 md:p-12 shadow-lg hidden-element">
+    <h2 class="font-cinzel text-3xl text-gold text-center mb-12 relative inline-block">
+      Mes Compétences
+      <span class="absolute bottom-[-10px] left-1/2 transform -translate-x-1/2 w-24 h-0.5 bg-gold"></span>
+    </h2>
+
+    <div class="bg-dark-bg/50 p-6 border border-gold/30 flex flex-wrap justify-center gap-10">
+      <div class="skill hidden-element">
+        <h3 class="text-xl font-semibold mb-3">HTML</h3>
+        <div class="progress-circular" style="--percentage: 80">
+          <div class="progress-label">80%</div>
+        </div>
+      </div>
+
+      <div class="skill hidden-element">
+        <h3 class="text-xl font-semibold mb-3">CSS</h3>
+        <div class="progress-circular" style="--percentage: 80">
+          <div class="progress-label">80%</div>
+        </div>
+      </div>
+
+      <div class="skill hidden-element">
+        <h3 class="text-xl font-semibold mb-3">JS</h3>
+        <div class="progress-circular" style="--percentage: 50">
+          <div class="progress-label">50%</div>
+        </div>
+      </div>
+
+      <div class="skill hidden-element">
+        <h3 class="text-xl font-semibold mb-3">PHP</h3>
+        <div class="progress-circular" style="--percentage: 40">
+          <div class="progress-label">40%</div>
+        </div>
+      </div>
+
+      <div class="skill hidden-element">
+        <h3 class="text-xl font-semibold mb-3">SQL</h3>
+        <div class="progress-circular" style="--percentage: 30">
+          <div class="progress-label">30%</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Section Projets -->
+<section id="projets" class="section-container py-20 px-4">
+  <div class="max-w-4xl mx-auto bg-dark-bg-light border-l-2 border-r-2 border-gold p-8 md:p-12 shadow-lg hidden-element">
+    <h2 class="font-cinzel text-3xl text-gold text-center mb-12 relative inline-block">
+      Mes Projets
+      <span class="absolute bottom-[-10px] left-1/2 transform -translate-x-1/2 w-24 h-0.5 bg-gold"></span>
+    </h2>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <!-- Projet 2 -->
+      <div class="bg-dark-bg/50 border border-gold/30 hover:border-gold transition-all duration-300 hover:-translate-y-2 hover:shadow-lg hover:shadow-gold/20 group hidden-element">
+        <div class="p-6 flex flex-col h-full">
+          <h3 class="font-cinzel text-xl text-gold mb-3">Minuteur</h3>
+          <p class="text-sm mb-4 flex-grow">Une application simple et efficace de minuteur en JavaScript, idéale pour gérer ton temps ou organiser des sessions de travail.</p>
+          <div class="flex flex-wrap gap-2 mb-4">
+            <span class="text-xs bg-gold/10 text-gold px-2 py-1 border border-gold/20">HTML</span>
+            <span class="text-xs bg-gold/10 text-gold px-2 py-1 border border-gold/20">CSS</span>
+            <span class="text-xs bg-gold/10 text-gold px-2 py-1 border border-gold/20">JavaScript</span>
+          </div>
+          <a href=" https://yanisbenour36.github.io/minuteur.github.io/" class="mt-auto text-center py-2 border border-gold text-text-color hover:bg-gold/10 hover:text-gold transition-colors duration-300 show-modal"> <button >
+      Voir le site</button></a>
+        </div>
+      </div>
+
+      <!-- Projet 3 -->
+      <div class="bg-dark-bg/50 border border-gold/30 hover:border-gold transition-all duration-300 hover:-translate-y-2 hover:shadow-lg hover:shadow-gold/20 group hidden-element">
+        <div class="p-6 flex flex-col h-full">
+          <h3 class="font-cinzel text-xl text-gold mb-3">Générateur de citation</h3>
+          <p class="text-sm mb-4 flex-grow">Un générateur aléatoire de citations inspirantes provenant de plusieurs cultures et pays, pour découvrir des pensées motivantes du monde entier.</p>
+          <div class="flex flex-wrap gap-2 mb-4">
+            <span class="text-xs bg-gold/10 text-gold px-2 py-1 border border-gold/20">HTML</span>
+            <span class="text-xs bg-gold/10 text-gold px-2 py-1 border border-gold/20">CSS</span>
+            <span class="text-xs bg-gold/10 text-gold px-2 py-1 border border-gold/20">JavaScript</span>
+          </div>
+          <a href="https://yanisbenour36.github.io/citation1.github.io/"class="mt-auto text-center py-2 border border-gold text-text-color hover:bg-gold/10 hover:text-gold transition-colors duration-300 show-modal"><button >Voir le site</button></a>
+        </div>
+      </div>
+
+      <!-- Projet 4 -->
+      <div class="bg-dark-bg/50 border border-gold/30 hover:border-gold transition-all duration-300 hover:-translate-y-2 hover:shadow-lg hover:shadow-gold/20 group hidden-element">
+        <div class="p-6 flex flex-col h-full">
+          <h3 class="font-cinzel text-xl text-gold mb-3">Todo-List</h3>
+          <p class="text-sm mb-4 flex-grow">Une application web qui permet de créer, modifier et organiser sa propre liste de tâches à faire. Pratique pour booster ta productivité au quotidien.</p>
+          <div class="flex flex-wrap gap-2 mb-4">
+            <span class="text-xs bg-gold/10 text-gold px-2 py-1 border border-gold/20">HTML</span>
+            <span class="text-xs bg-gold/10 text-gold px-2 py-1 border border-gold/20">CSS</span>
+            <span class="text-xs bg-gold/10 text-gold px-2 py-1 border border-gold/20">JavaScript</span>
+            <span class="text-xs bg-gold/10 text-gold px-2 py-1 border border-gold/20">PHP</span>
+            <span class="text-xs bg-gold/10 text-gold px-2 py-1 border border-gold/20">SQL</span>
+          </div>
+          <a href="https://yanisbenour36.github.io/todolist/" class="mt-auto text-center py-2 border border-gold text-text-color hover:bg-gold/10 hover:text-gold transition-colors duration-300 show-modal"> <button  >Voir le site</button></a>
+        </div>
+      </div>
+
+      <!-- Projet 5 -->
+      <div class="bg-dark-bg/50 border border-gold/30 hover:border-gold transition-all duration-300 hover:-translate-y-2 hover:shadow-lg hover:shadow-gold/20 group hidden-element">
+        <div class="p-6 flex flex-col h-full">
+          <h3 class="font-cinzel text-xl text-gold mb-3">CMS</h3>
+          <p class="text-sm mb-4 flex-grow">Un système de gestion de contenu qui offre aux rédacteurs la possibilité de créer et publier facilement des articles grâce à un éditeur WYSIWYG (What You See Is What You Get).</p>
+          <div class="flex flex-wrap gap-2 mb-4">
+            <span class="text-xs bg-gold/10 text-gold px-2 py-1 border border-gold/20">HTML</span>
+            <span class="text-xs bg-gold/10 text-gold px-2 py-1 border border-gold/20">CSS</span>
+            <span class="text-xs bg-gold/10 text-gold px-2 py-1 border border-gold/20">JavaScript</span>
+            <span class="text-xs bg-gold/10 text-gold px-2 py-1 border border-gold/20">PHP</span>
+            <span class="text-xs bg-gold/10 text-gold px-2 py-1 border border-gold/20">SQL</span>
+          </div>
+          <button class="mt-auto text-center py-2 border border-gold text-text-color hover:bg-gold/10 hover:text-gold transition-colors duration-300 show-modal" data-modal="modal-projet-5">Voir le site sous forme de maquette</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Section Contact -->
+<section id="contact" class="section-container py-20 px-4">
+  <div class="max-w-4xl mx-auto bg-dark-bg-light border-t-2 border-b-2 border-gold p-8 md:p-12 shadow-lg hidden-element">
+    <h2 class="font-cinzel text-3xl text-gold text-center mb-12 relative inline-block">
+      Contact
+      <span class="absolute bottom-[-10px] left-1/2 transform -translate-x-1/2 w-24 h-0.5 bg-gold"></span>
+    </h2>
+
+    <div class="flex flex-col md:flex-row gap-8">
+      <!-- Informations de contact -->
+      <div class="flex-1 bg-dark-bg/50 p-6 border border-gold/30 hidden-element">
+        <h3 class="text-xl font-semibold mb-6 text-gold">Mes coordonnées</h3>
+
+        <div class="space-y-6">
+          <div class="flex items-start hidden-element">
+            <i class="fas fa-map-marker-alt text-gold text-xl w-8"></i>
+            <div class="ml-4">
+              <h4 class="font-medium">Localisation</h4>
+              <p class="text-text-color/80">Métropole de Rouen, France</p>
+            </div>
+          </div>
+
+          <div class="flex items-start hidden-element">
+            <i class="fas fa-envelope text-gold text-xl w-8"></i>
+            <div class="ml-4">
+              <h4 class="font-medium">Email</h4>
+              <p class="text-text-color/80">benaalma.yanis@nfs.school</p>
+            </div>
+          </div>
+
+          <div class="flex items-start hidden-element">
+            <i class="fas fa-phone text-gold text-xl w-8"></i>
+            <div class="ml-4">
+              <h4 class="font-medium">Téléphone</h4>
+              <p class="text-text-color/80">06-14-74-40-20</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="mt-8 flex justify-center space-x-4 hidden-element">
+          <a href="https://gitlab.com/yhs212" class="text-gold hover:text-text-color transition-colors duration-300">
+            <i class="fab fa-github text-2xl"></i>
+          </a>
+          <a href="https://www.linkedin.com/in/yanis-benaalma-233953339/" class="text-gold hover:text-text-color transition-colors duration-300">
+            <i class="fab fa-linkedin text-2xl"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer bg-dark-bg-lighter border-t border-gold py-8">
+  <div class="container mx-auto px-4 footer">
+    <div class="flex flex-col md:flex-row justify-between">
+      <div class="flex space-x-6 mx-auto">
+        <a href="https://gitlab.com/yhs212" class="text-gold hover:text-text-color transition-colors duration-300">
+          <i class="fab fa-github"></i>
+        </a>
+        <a href="https://www.linkedin.com/in/yanis-benaalma-233953339/" class="text-gold hover:text-text-color transition-colors duration-300">
+          <i class="fab fa-linkedin"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+
+
+
+<div id="modal-projet-5" class="modal">
+  <div class="modal-content">
+    <span class="close-modal">&times;</span>
+    <h2 class="font-cinzel text-2xl text-gold mb-6">Maquette du projet CMS</h2>
+
+    <!-- Grille de 4 images -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+      <div class="overflow-hidden border-2 border-gold/30">
+        <img src="img/acceui.jpg"alt="CMS - Page d'accueil" class="w-full h-auto hover:scale-105 transition-transform duration-300">
+        <p class="text-center py-2 bg-dark-bg/80 text-gold">Page d'accueil</p>
+      </div>
+      <div class="overflow-hidden border-2 border-gold/30">
+        <img src="img/editeur.png" alt="CMS - Tableau de bord" class="w-full h-auto hover:scale-105 transition-transform duration-300">
+        <p class="text-center py-2 bg-dark-bg/80 text-gold">Tableau de bord</p>
+      </div>
+      <div class="overflow-hidden border-2 border-gold/30">
+        <img  src="img/gestion%20des%20article.png" alt="CMS - Éditeur d'articles" class="w-full h-auto hover:scale-105 transition-transform duration-300">
+        <p class="text-center py-2 bg-dark-bg/80 text-gold">Gestion d'articles</p>
+      </div>
+      <div class="overflow-hidden border-2 border-gold/30">
+        <img src="img/dashboard.png" alt="CMS - Gestion des médias" class="w-full h-auto hover:scale-105 transition-transform duration-300">
+        <p class="text-center py-2 bg-dark-bg/80 text-gold">Dashboard</p>
+      </div>
+    </div>
+
+    <div class="mt-6">
+      <h3 class="font-cinzel text-xl text-gold mb-3">Description</h3>
+      <p class="mb-4">Cette maquette présente l'interface du CMS, un système de gestion de contenu pour la création et publication d'articles. L'interface est conçue pour être intuitive et efficace pour les rédacteurs.</p>
+      <p>Les fonctionnalités incluent un éditeur WYSIWYG complet, la gestion des médias, la planification de publication, et des outils d'analyse de contenu pour optimiser l'engagement.</p>
+    </div>
+  </div>
+</div>
+
+<!-- Script d'activation de Vanta.js et animations -->
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // Activation de Vanta.js
+    VANTA.BIRDS({
+      el: "body",
+      mouseControls: true,
+      touchControls: true,
+      gyroControls: false,
+      minHeight: 200.00,
+      minWidth: 200.00,
+      scale: 1.00,
+      scaleMobile: 1.00,
+      color1: 0xc0a080,  // Couleur dorée
+      color2: 0x573c00,  // Couleur secondaire
+      backgroundColor: 0x0a0a0a, // Fond sombre
+      birdSize: 0.75,    // Oiseaux légèrement plus grands
+      wingSpan: 40.00,   // Envergure des ailes plus grande
+      speedLimit: 5.00,  // Vitesse légèrement réduite
+      separation: 20.00  // Plus de séparation entre les oiseaux
+    });
+
+    // Navigation mobile
+    const burger = document.querySelector('.burger');
+    const nav = document.querySelector('.nav-links');
+    const navLinks = document.querySelectorAll('.nav-links li');
+
+    burger.addEventListener('click', () => {
+      // Toggle Nav
+      nav.classList.toggle('nav-active');
+
+      // Animate Links
+      navLinks.forEach((link, index) => {
+        if (link.style.animation) {
+          link.style.animation = '';
+        } else {
+          link.style.animation = `navLinkFade 0.5s ease forwards ${index / 7 + 0.3}s`;
+        }
+      });
+
+      // Burger Animation
+      burger.classList.toggle('toggle');
+    });
+
+    // Animation au défilement
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          // Animer les éléments cachés
+          const hiddenElements = entry.target.querySelectorAll('.hidden-element');
+          hiddenElements.forEach((el, index) => {
+            setTimeout(() => {
+              el.classList.add('fade-in');
+              el.classList.remove('hidden-element');
+            }, index * 150); // Délai progressif pour chaque élément
+          });
+
+          observer.unobserve(entry.target);
+        }
+      });
+    }, {
+      threshold: 0.1
+    });
+
+    // Observer toutes les sections
+    document.querySelectorAll('.section-container').forEach(section => {
+      observer.observe(section);
+    });
+
+    // Gestion des modals
+    const modalButtons = document.querySelectorAll('.show-modal');
+    const modals = document.querySelectorAll('.modal');
+    const closeButtons = document.querySelectorAll('.close-modal');
+
+    modalButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        const modalId = button.getAttribute('data-modal');
+        const modal = document.getElementById(modalId);
+        modal.classList.add('show');
+        document.body.style.overflow = 'hidden'; // Empêcher le défilement
+      });
+    });
+
+    closeButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        const modal = button.closest('.modal');
+        modal.classList.remove('show');
+        document.body.style.overflow = ''; // Réactiver le défilement
+      });
+    });
+
+    // Fermer la modal en cliquant en dehors du contenu
+    modals.forEach(modal => {
+      modal.addEventListener('click', (e) => {
+        if (e.target === modal) {
+          modal.classList.remove('show');
+          document.body.style.overflow = '';
+        }
+      });
+    });
+
+    // Fermer la modal avec la touche Escape
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        modals.forEach(modal => {
+          if (modal.classList.contains('show')) {
+            modal.classList.remove('show');
+            document.body.style.overflow = '';
+          }
+        });
+      }
+    });
+
+    // Animer les éléments de la section d'accueil immédiatement
+    const accueilElements = document.querySelector('#accueil').querySelectorAll('.hidden-element');
+    accueilElements.forEach((el, index) => {
+      setTimeout(() => {
+        el.classList.add('fade-in');
+        el.classList.remove('hidden-element');
+      }, 500 + index * 150);
+    });
+  });
+</script>
+</body>
+</html>
