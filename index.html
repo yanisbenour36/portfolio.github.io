@@ -3,12 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Yanis Benaalma | Ronin Développeur</title>
+  <title>Yanis Benaalma | Portfolio</title>
 
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Noto+Sans+JP:wght@300;400;700&display=swap" rel="stylesheet">
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.birds.min.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
 
   <script src="https://cdn.tailwindcss.com"></script>
@@ -17,10 +14,9 @@
       theme: {
         extend: {
           colors: {
-            'washi': '#e8e4d9', // Couleur papier ancien
-            'ink': '#1a1a1b',   // Noir encre
-            'samurai-red': '#8b0000', // Rouge sombre type sceau japonais
-            'gold-ink': '#c0a080'
+            'dark-washi': '#121212',
+            'samurai-red': '#b91c1c',
+            'card-bg': '#1a1a1a'
           },
           fontFamily: {
             'cinzel': ['Cinzel', 'serif'],
@@ -34,175 +30,308 @@
   <style type="text/tailwindcss">
     @layer utilities {
       body {
-        background-color: #e8e4d9;
-        color: #1a1a1b;
+        background-color: #121212;
+        color: #e5e5e5;
         font-family: 'Noto Sans JP', sans-serif;
+        scroll-behavior: smooth;
       }
       .ink-border {
-        border: 2px solid #1a1a1b;
-        box-shadow: 5px 5px 0px #1a1a1b;
+        border: 1px solid rgba(229, 229, 229, 0.15);
       }
       .section-container {
-        min-height: 100vh;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
+        padding: 60px 20px;
+        max-width: 1100px;
+        margin: 0 auto;
       }
-      .hidden-element { opacity: 0; transform: translateY(30px); transition: all 0.8s ease-out; }
-      .fade-in { opacity: 1; transform: translateY(0); }
-      
-      /* Style circulaire type pinceau */
-      .progress-circular {
-        position: relative; width: 100px; height: 100px; border-radius: 50%;
-        background: conic-gradient(#8b0000 calc(var(--percentage) * 1%), #d1cdc1 0);
-        display: flex; justify-content: center; align-items: center;
+      .pdf-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+        gap: 1rem;
       }
-      .progress-circular::before {
-        content: ""; position: absolute; width: 85px; height: 85px;
-        border-radius: 50%; background-color: #e8e4d9;
+      a.source-link {
+        color: #b91c1c;
+        text-decoration: underline;
+        transition: color 0.3s;
       }
-      .modal {
-        display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-        background-color: rgba(26, 26, 27, 0.95); z-index: 100; justify-content: center; align-items: center;
+      a.source-link:hover {
+        color: #ffffff;
       }
-      .modal.show { display: flex; }
     }
   </style>
 </head>
 
 <body>
 
-<nav class="fixed top-0 w-full bg-washi border-b-2 border-ink z-50">
-  <div class="container mx-auto px-6 py-4 flex justify-between items-center">
-    <div class="text-3xl font-cinzel font-black tracking-tighter"></div> <ul class="hidden md:flex space-x-8 font-cinzel font-bold text-sm">
-      <li><a href="#accueil" class="hover:text-samurai-red transition-colors">ACCEUIL</a></li>
-      <li><a href="#a-propos" class="hover:text-samurai-red transition-colors">A PROPOS DE MOI</a></li>
-      <li><a href="#competences" class="hover:text-samurai-red transition-colors">MES COMPETENCES</a></li>
-      <li><a href="#projets" class="hover:text-samurai-red transition-colors">MES PROJETS</a></li>
-      <li><a href="#contact" class="hover:text-samurai-red transition-colors">COORDONEES</a></li>
-    </ul>
-    <div class="burger md:hidden cursor-pointer text-2xl"><i class="fas fa-bars"></i></div>
+<nav class="sticky top-0 w-full bg-dark-washi/90 backdrop-blur-md border-b border-white/10 z-50">
+  <div class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
+    <div class="text-2xl font-cinzel font-black tracking-tighter text-samurai-red">矢ニス</div>
+    
+    <div class="flex items-center space-x-8">
+      <ul class="hidden lg:flex space-x-6 font-cinzel font-bold text-[10px] md:text-xs">
+        <li><a href="#accueil" class="hover:text-samurai-red transition-colors">ACCUEIL</a></li>
+        <li><a href="#veille" class="hover:text-samurai-red transition-colors">VEILLE</a></li>
+        <li><a href="#projets" class="hover:text-samurai-red transition-colors">PROJETS</a></li>
+        <li><a href="#documents" class="hover:text-samurai-red transition-colors">DOCUMENTS</a></li>
+      </ul>
+      
+      <a href="CV_Yanis_Benaalma.pdf" download class="font-cinzel font-bold px-4 py-2 bg-samurai-red text-white hover:bg-white hover:text-samurai-red transition-all text-[10px] tracking-widest uppercase flex items-center border border-samurai-red">
+        <i class="fas fa-file-download mr-2"></i> CV PDF
+      </a>
+    </div>
   </div>
 </nav>
 
-<section id="accueil" class="section-container text-center px-4">
-  <div class="hidden-element">
-    <h1 class="font-cinzel text-6xl md:text-8xl font-black mb-6 uppercase">Yanis Benaalma</h1>
-    
-    <div class="relative w-64 h-64 mx-auto mb-8 ink-border overflow-hidden rotate-3">
-      <img src="img/photo.png" alt="Yanis" class="w-full h-full object-cover grayscale contrast-125 -rotate-3 hover:scale-110 transition-transform duration-700">
+<header id="accueil" class="section-container text-center pt-32 pb-20">
+  <h1 class="font-cinzel text-5xl md:text-6xl font-black mb-4">Yanis Benaalma</h1>
+  <p class="font-cinzel text-lg tracking-[0.3em] text-samurai-red italic uppercase">Développeur Web & Administrateur Système</p>
+  <div class="w-24 h-0.5 bg-samurai-red mx-auto mt-6 opacity-50"></div>
+</header>
+
+<section id="veille" class="section-container border-t border-white/5">
+  <div class="text-center mb-12">
+    <h2 class="font-cinzel text-2xl mb-2 tracking-widest text-samurai-red">VEILLE TECHNOLOGIQUE</h2>
+
+  </div>
+  
+  <div class="grid grid-cols-1 gap-10">
+    <div class="bg-card-bg p-6 ink-border border-l-4 border-l-samurai-red">
+      <div class="flex items-center mb-6">
+       
+        <h3 class="font-cinzel font-bold text-xl tracking-wider">Thème 1 : L'OSINT</h3>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-sm">
+        <div>
+          <h4 class="text-samurai-red font-bold mb-3 uppercase text-[10px]">Sources Références</h4>
+          <ul class="space-y-2 opacity-80 leading-relaxed">
+            <li>• <a href="https://inteltechniques.com" target="_blank" class="source-link">IntelTechniques</a></li>
+            <li>• <a href="https://osintframework.com" target="_blank" class="source-link">OSINT Framework</a></li>
+            <li>• <a href="https://www.onyphe.io" target="_blank" class="source-link">Onyphe</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="text-samurai-red font-bold mb-3 uppercase text-[10px]">Méthodologie</h4>
+          <p class="opacity-70">Collecte automatisée via flux RSS pour identifier les nouveaux outils de pivotement et surveiller les actifs exposés.</p>
+        </div>
+        <div>
+          <h4 class="text-samurai-red font-bold mb-3 uppercase text-[10px]">Analyse</h4>
+          <p class="opacity-70 italic">"L'OSINT permet une cartographie proactive de la surface d'attaque."</p>
+        </div>
+      </div>
     </div>
 
-    <div class="flex flex-col items-center space-y-2 font-cinzel font-bold italic">
-      <p><i class="fas fa-map-marker-alt mr-2"></i> ROUEN,AMIENS</p>
-      <p class="text-samurai-red">RECHERCHE DE STAGE</p>
+    <div class="bg-card-bg p-6 ink-border border-l-4 border-l-samurai-red">
+      <div class="flex items-center mb-6">
+       
+        <h3 class="font-cinzel font-bold text-xl tracking-wider">Thème 2 : Backdoors</h3>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-sm">
+        <div>
+          <h4 class="text-samurai-red font-bold mb-3 uppercase text-[10px]">Sources Références</h4>
+          <ul class="space-y-2 opacity-80 leading-relaxed">
+            <li>• <a href="https://therecord.media" target="_blank" class="source-link">The Record</a></li>
+            <li>• <a href="https://www.mandiant.com" target="_blank" class="source-link">Mandiant Intelligence</a></li>
+            <li>• <a href="https://www.exploit-db.com" target="_blank" class="source-link">Exploit-DB</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="text-samurai-red font-bold mb-3 uppercase text-[10px]">Méthodologie</h4>
+          <p class="opacity-70">Surveillance des compromissions d'éditeurs tiers via les bulletins de l'ANSSI et rapports d'incidents Mandiant.</p>
+        </div>
+        <div>
+          <h4 class="text-samurai-red font-bold mb-3 uppercase text-[10px]">Analyse</h4>
+          <p class="opacity-70 italic">"La Supply Chain Attack détourne la confiance logicielle pour implanter des accès persistants."</p>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
-<section id="a-propos" class="section-container py-20 px-6">
-  <div class="max-w-4xl mx-auto ink-border bg-washi p-10 hidden-element">
-    <h2 class="font-cinzel text-4xl mb-8 border-b-4 border-samurai-red inline-block">A PROPOS DE MOI</h2>
-    <div class="space-y-6 text-lg leading-relaxed italic">
-          <p>Développeur web junior en pleine évolution, je suis passionné par la création d'interfaces modernes, fonctionnelles et bien structurées. Curieux, rigoureux et toujours en quête de progression, j'ai à cœur de développer des solutions efficaces et élégantes.</p>
-    </div>
-  </div>
-</section>
-
-<section id="competences" class="section-container py-20 px-6 bg-ink text-washi">
-  <div class="max-w-5xl mx-auto text-center hidden-element">
-    <h2 class="font-cinzel text-4xl mb-16">MES COMPETENCES</h2>
-    <div class="flex flex-wrap justify-center gap-12">
-      <div class="text-center">
-        <div class="progress-circular mb-4" style="--percentage: 80">
-          <span class="relative text-ink font-bold">80%</span>
-        </div>
-        <p class="font-cinzel">HTML / CSS</p>
-      </div>
-      <div class="text-center">
-        <div class="progress-circular mb-4" style="--percentage: 60">
-          <span class="relative text-ink font-bold">60%</span>
-        </div>
-        <p class="font-cinzel">JAVASCRIPT</p>
-      </div>
-      <div class="text-center">
-        <div class="progress-circular mb-4" style="--percentage: 50">
-          <span class="relative text-ink font-bold">50%</span>
-        </div>
-        <p class="font-cinzel">PHP / SQL</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="projets" class="section-container py-20 px-6">
-  <div class="max-w-6xl mx-auto">
-    <h2 class="font-cinzel text-4xl mb-16 text-center">MES PROJETS</h2>
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+<section id="projets" class="section-container border-t border-white/5">
+    <h2 class="font-cinzel text-2xl mb-8 text-center tracking-widest text-samurai-red">PROJETS WEB</h2>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-center">
+        <a href="https://yanisbenour36.github.io/minuteur.github.io/" target="_blank" class="p-6 bg-card-bg ink-border hover:bg-samurai-red transition-all group">
+            <i class="fas fa-clock mb-3 text-xl opacity-50 group-hover:opacity-100"></i>
+            <p class="font-bold text-xs uppercase tracking-widest">Minuteur JS</p>
+        </a>
+        <a href="https://yanisbenour36.github.io/citation1.github.io/" target="_blank" class="p-6 bg-card-bg ink-border hover:bg-samurai-red transition-all group">
+            <i class="fas fa-quote-left mb-3 text-xl opacity-50 group-hover:opacity-100"></i>
+            <p class="font-bold text-xs uppercase tracking-widest">Citations</p>
+        </a>
       
-      <div class="ink-border p-6 bg-washi hover:-translate-y-2 transition-transform hidden-element">
-        <h3 class="font-cinzel text-2xl mb-4 border-b-2 border-ink">MINUTEUR</h3>
-        <a href="https://yanisbenour36.github.io/minuteur.github.io/" class="block text-center py-2 bg-ink text-washi font-bold hover:bg-samurai-red transition-colors">VOIR</a>
-      </div>
-
-      <div class="ink-border p-6 bg-washi hover:-translate-y-2 transition-transform hidden-element">
-        <h3 class="font-cinzel text-2xl mb-4 border-b-2 border-ink">CITATIONS</h3>
-        <a href="https://yanisbenour36.github.io/citation1.github.io/" class="block text-center py-2 bg-ink text-washi font-bold hover:bg-samurai-red transition-colors">VOIR</a>
-      </div>
-
-      <div class="ink-border p-6 bg-washi hover:-translate-y-2 transition-transform hidden-element">
-        <h3 class="font-cinzel text-2xl mb-4 border-b-2 border-ink">TODO-LIST</h3>
-        <a href="https://yanisbenour36.github.io/todolist/" class="block text-center py-2 bg-ink text-washi font-bold hover:bg-samurai-red transition-colors">VOIR</a>
-      </div>
     </div>
+</section>
+
+<section id="documents" class="section-container border-t border-white/5">
+  <h2 class="font-cinzel text-2xl mb-8 text-center tracking-widest text-samurai-red">TRAVAUX PRATIQUES & COMPTES RENDUS</h2>
+  
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+    
+    <a href="pdf/tp3.pdf" target="_blank" class="bg-card-bg p-5 ink-border flex flex-col hover:border-samurai-red transition-all group">
+        <span class="text-[10px] font-bold uppercase tracking-widest text-white mb-2 flex items-center">
+          <i class="fab fa-windows text-samurai-red mr-2"></i> Tiny10 : Installation
+        </span>
+        <p class="text-[10px] text-gray-500 italic leading-relaxed">Optimisation système par l'installation d'une version Windows ultra-légère (Tiny10) et configuration des extensions VirtualBox.</p>
+    </a>
+
+    <a href="pdf/tp4.pdf" target="_blank" class="bg-card-bg p-5 ink-border flex flex-col hover:border-samurai-red transition-all group">
+        <span class="text-[10px] font-bold uppercase tracking-widest text-white mb-2 flex items-center">
+          <i class="fas fa-terminal text-samurai-red mr-2"></i> CMD : Fondamentaux
+        </span>
+        <p class="text-[10px] text-gray-500 italic leading-relaxed">Exploration de l'invite de commandes : navigation, manipulation de fichiers, filtres (find/findstr) et gestion des processus.</p>
+    </a>
+
+    <a href="pdf/tp4.2.pdf" target="_blank" class="bg-card-bg p-5 ink-border flex flex-col hover:border-samurai-red transition-all group">
+        <span class="text-[10px] font-bold uppercase tracking-widest text-white mb-2 flex items-center">
+          <i class="fas fa-user-shield text-samurai-red mr-2"></i> CMD : Administration
+        </span>
+        <p class="text-[10px] text-gray-500 italic leading-relaxed">Maîtrise du CMD pour le troubleshooting réseau, la gestion des privilèges et l'automatisation de diagnostics système.</p>
+    </a>
+
+    <a href="pdf/tp5.pdf" target="_blank" class="bg-card-bg p-5 ink-border flex flex-col hover:border-samurai-red transition-all group">
+        <span class="text-[10px] font-bold uppercase tracking-widest text-white mb-2 flex items-center">
+          <i class="fas fa-folder-tree text-samurai-red mr-2"></i> CMD vs PowerShell
+        </span>
+        <p class="text-[10px] text-gray-500 italic leading-relaxed">Organisation d'arborescences métiers (SISR/SLAM) et comparaison des syntaxes entre l'invite de commande et PowerShell.</p>
+    </a>
+
+    <a href="pdf/tp5.2.pdf" target="_blank" class="bg-card-bg p-5 ink-border flex flex-col hover:border-samurai-red transition-all group">
+        <span class="text-[10px] font-bold uppercase tracking-widest text-white mb-2 flex items-center">
+          <i class="fas fa-save text-samurai-red mr-2"></i> Batch : Sauvegarde
+        </span>
+        <p class="text-[10px] text-gray-500 italic leading-relaxed">Conception d'un script expert pour automatiser les sauvegardes horodatées avec génération de rapports de logs détaillés.</p>
+    </a>
+
+    <a href="pdf/tp6.1.pdf" target="_blank" class="bg-card-bg p-5 ink-border flex flex-col hover:border-samurai-red transition-all group">
+        <span class="text-[10px] font-bold uppercase tracking-widest text-white mb-2 flex items-center">
+          <i class="fas fa-tools text-samurai-red mr-2"></i> Support Informatique
+        </span>
+        <p class="text-[10px] text-gray-500 italic leading-relaxed">Commandes essentielles de diagnostic (Ping, Tracert, Netstat) et scripts d'onboarding (création auto de comptes utilisateurs).</p>
+    </a>
+
+    <a href="pdf/tp2.pdf" target="_blank" class="bg-card-bg p-5 ink-border flex flex-col hover:border-samurai-red transition-all group">
+        <span class="text-[10px] font-bold uppercase tracking-widest text-white mb-2 flex items-center">
+          <i class="fas fa-microchip text-samurai-red mr-2"></i> Hardware & Configs
+        </span>
+        <p class="text-[10px] text-gray-500 italic leading-relaxed">Étude comparative et budgétisation de configurations PC : Station étudiant, Serveur PME et PC Gaming.</p>
+    </a>
+
+    <a href="pdf/tp5.1.pdf" target="_blank" class="bg-card-bg p-5 ink-border flex flex-col hover:border-samurai-red transition-all group">
+        <span class="text-[10px] font-bold uppercase tracking-widest text-white mb-2 flex items-center">
+          <i class="fas fa-database text-samurai-red mr-2"></i> Bases de Données
+        </span>
+        <p class="text-[10px] text-gray-500 italic leading-relaxed">Anatomie des SGBDR : modélisation de dictionnaires de données et compréhension des types de champs (Varchar, Int, etc.).</p>
+    </a>
+<a href="pdf/TP VM UBUNTU ETAPE 2.pdf" target="_blank" class="bg-card-bg p-5 ink-border flex flex-col hover:border-samurai-red transition-all group">
+        <span class="text-[10px] font-bold uppercase tracking-widest text-white mb-2 flex items-center">
+          <i class="fab fa-linux text-samurai-red mr-2"></i> Ubuntu : Installation
+        </span>
+        <p class="text-[10px] text-gray-500 italic leading-relaxed">Mise en place d'une machine virtuelle Xubuntu : configuration de l'assistant, partitionnement et premier démarrage.</p>
+    </a>
+
+    <a href="pdf/TP VM UBUNTU ETAPE 3.pdf" target="_blank" class="bg-card-bg p-5 ink-border flex flex-col hover:border-samurai-red transition-all group">
+        <span class="text-[10px] font-bold uppercase tracking-widest text-white mb-2 flex items-center">
+          <i class="fas fa-terminal text-samurai-red mr-2"></i> Environnement & Sudo
+        </span>
+        <p class="text-[10px] text-gray-500 italic leading-relaxed">Apprentissage des privilèges root via la commande Sudo, gestion des paquets APT et personnalisation de l'environnement.</p>
+    </a>
+
+    <a href="pdf/TP VM UBUNTU ETAPE 4.pdf" target="_blank" class="bg-card-bg p-5 ink-border flex flex-col hover:border-samurai-red transition-all group">
+        <span class="text-[10px] font-bold uppercase tracking-widest text-white mb-2 flex items-center">
+          <i class="fas fa-link text-samurai-red mr-2"></i> Addons & Partages
+        </span>
+        <p class="text-[10px] text-gray-500 italic leading-relaxed">Installation des Additions Invité VirtualBox pour le partage du presse-papier et la configuration de dossiers partagés hôte/invité.</p>
+    </a>
+
+    <a href="pdf/TP VM UBUNTU ETAPE 5.pdf" target="_blank" class="bg-card-bg p-5 ink-border flex flex-col hover:border-samurai-red transition-all group">
+        <span class="text-[10px] font-bold uppercase tracking-widest text-white mb-2 flex items-center">
+          <i class="fas fa-users-cog text-samurai-red mr-2"></i> Gestion Utilisateurs
+        </span>
+        <p class="text-[10px] text-gray-500 italic leading-relaxed">Administration des comptes et droits d'accès (chmod/chown) avec analyse des fichiers de sécurité /etc/passwd et /etc/shadow.</p>
+    </a>
+
+    <a href="pdf/TP VM UBUNTU ETAPE 6.pdf" target="_blank" class="bg-card-bg p-5 ink-border flex flex-col hover:border-samurai-red transition-all group">
+        <span class="text-[10px] font-bold uppercase tracking-widest text-white mb-2 flex items-center">
+          <i class="fas fa-shield-alt text-samurai-red mr-2"></i> Outils de Sécurité
+        </span>
+        <p class="text-[10px] text-gray-500 italic leading-relaxed">Installation d'outils d'audit réseau et applicatif : scan de ports avec Nmap et interception de flux via Burp Suite.</p>
+    </a>
+
+    <a href="pdf/TP VM UBUNTU ETAPE 8.1.pdf" target="_blank" class="bg-card-bg p-5 ink-border flex flex-col hover:border-samurai-red transition-all group">
+        <span class="text-[10px] font-bold uppercase tracking-widest text-white mb-2 flex items-center">
+          <i class="fas fa-server text-samurai-red mr-2"></i> Serveur Web Apache
+        </span>
+        <p class="text-[10px] text-gray-500 italic leading-relaxed">Mise en place d'un serveur HTTP Apache, gestion des services via systemd et configuration de VirtualHosts.</p>
+    </a>
+
+    <a href="pdf/TP VM UBUNTU ETAPE 8.2.pdf" target="_blank" class="bg-card-bg p-5 ink-border flex flex-col hover:border-samurai-red transition-all group">
+        <span class="text-[10px] font-bold uppercase tracking-widest text-white mb-2 flex items-center">
+          <i class="fas fa-lock text-samurai-red mr-2"></i> Stack LAMP & HTTPS
+        </span>
+        <p class="text-[10px] text-gray-500 italic leading-relaxed">Sécurisation TLS/SSL, déploiement du moteur PHP, installation de MariaDB et de l'interface phpMyAdmin.</p>
+    </a>
+
+    <a href="pdf/tp3.pdf" target="_blank" class="bg-card-bg p-5 ink-border flex flex-col hover:border-samurai-red transition-all group">
+        <span class="text-[10px] font-bold uppercase tracking-widest text-white mb-2 flex items-center">
+          <i class="fab fa-windows text-samurai-red mr-2"></i> Tiny10 : Installation
+        </span>
+        <p class="text-[10px] text-gray-500 italic leading-relaxed">Optimisation système par l'installation d'une version Windows ultra-légère dédiée à la virtualisation.</p>
+    </a>
+
+    <a href="pdf/tp4.2.pdf" target="_blank" class="bg-card-bg p-5 ink-border flex flex-col hover:border-samurai-red transition-all group">
+        <span class="text-[10px] font-bold uppercase tracking-widest text-white mb-2 flex items-center">
+          <i class="fas fa-code text-samurai-red mr-2"></i> Maîtrise du CMD
+        </span>
+        <p class="text-[10px] text-gray-500 italic leading-relaxed">Administration avancée de Windows en ligne de commande : réseaux, arborescence et gestion des processus.</p>
+    </a>
+
+    <a href="pdf/tp5.2.pdf" target="_blank" class="bg-card-bg p-5 ink-border flex flex-col hover:border-samurai-red transition-all group">
+        <span class="text-[10px] font-bold uppercase tracking-widest text-white mb-2 flex items-center">
+          <i class="fas fa-save text-samurai-red mr-2"></i> Script Sauvegarde
+        </span>
+        <p class="text-[10px] text-gray-500 italic leading-relaxed">Conception d'un script d'automatisation Batch (.bat) pour la sauvegarde de données avec gestion de logs.</p>
+    </a>
+
+    <a href="pdf/tp2.pdf" target="_blank" class="bg-card-bg p-5 ink-border flex flex-col hover:border-samurai-red transition-all group">
+        <span class="text-[10px] font-bold uppercase tracking-widest text-white mb-2 flex items-center">
+          <i class="fas fa-microchip text-samurai-red mr-2"></i> Configurations PC
+        </span>
+        <p class="text-[10px] text-gray-500 italic leading-relaxed">Étude hardware et sélection de composants optimisés selon des besoins métiers (Serveur vs Bureautique).</p>
+    </a>
   </div>
 </section>
 
-<section id="contact" class="section-container py-20 px-6 bg-ink text-washi">
-  <div class="max-w-2xl mx-auto text-center hidden-element">
-    <h2 class="font-cinzel text-4xl mb-12">MES COORDONEES</h2>
-    <div class="space-y-4 text-xl">
-      <p><i class="fas fa-envelope text-samurai-red mr-3"></i> yanisbenour36@gmail.com</p>
-      <p><i class="fas fa-phone text-samurai-red mr-3"></i> 06 14 74 40 20</p>
+
+<section id="contact" class="section-container border-t border-white/5">
+  <div class="text-center mb-12">
+    <h2 class="font-cinzel text-2xl mb-2 tracking-widest text-samurai-red">COORDONNÉES</h2>
+    <p class="text-[10px] opacity-40 uppercase tracking-[0.2em] italic">Disponible pour projets et alternance</p>
+  </div>
+
+  <div class="max-w-3xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6">
+    <div class="bg-card-bg p-6 ink-border text-center hover:border-samurai-red transition-all">
+      <i class="fas fa-envelope text-samurai-red mb-4 text-2xl"></i>
+      <h3 class="font-cinzel text-[10px] font-bold tracking-widest mb-2">EMAIL</h3>
+      <a href="mailto:yanisbenour36@gmail.com" class="text-xs opacity-70 hover:text-white transition-colors">yanisbenour36@gmail.com</a>
     </div>
-    <div class="flex justify-center space-x-8 mt-12">
-      <a href="https://github.com/yanisbenour36" class="text-3xl hover:text-samurai-red transition-colors"><i class="fab fa-github"></i></a>
-      <a href="https://www.linkedin.com/in/yanis-benaalma-233953339/" class="text-3xl hover:text-samurai-red transition-colors"><i class="fab fa-linkedin"></i></a>
+
+    <div class="bg-card-bg p-6 ink-border text-center hover:border-samurai-red transition-all">
+      <i class="fab fa-linkedin-in text-samurai-red mb-4 text-2xl"></i>
+      <h3 class="font-cinzel text-[10px] font-bold tracking-widest mb-2">LINKEDIN</h3>
+      <a href="https://www.linkedin.com/in/yanis-benaalma-233953339/" target="_blank" class="text-xs opacity-70 hover:text-white transition-colors">Yanis Benaalma</a>
+    </div>
+
+    <div class="bg-card-bg p-6 ink-border text-center hover:border-samurai-red transition-all">
+      <i class="fas fa-map-marker-alt text-samurai-red mb-4 text-2xl"></i>
+      <h3 class="font-cinzel text-[10px] font-bold tracking-widest mb-2">LOCALISATION</h3>
+      <p class="text-xs opacity-70">Amiens,Rouen,France</p>
     </div>
   </div>
 </section>
-<script>
-  document.addEventListener('DOMContentLoaded', function() {
-    // Vanta.js - Oiseaux noirs façon encre de chine
-    VANTA.BIRDS({
-      el: "body",
-      mouseControls: true,
-      touchControls: true,
-      gyroControls: false,
-      minHeight: 200.00,
-      minWidth: 200.00,
-      scale: 1.00,
-      scaleMobile: 1.00,
-      backgroundColor: 0xe8e4d9, // Couleur Washi
-      color1: 0x1a1a1b,        // Noir encre
-      color2: 0x8b0000,        // Touche de rouge
-      birdSize: 0.8,
-      speedLimit: 4.0,
-      separation: 40.0
-    });
-
-    // Observer pour les animations au scroll
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('fade-in');
-        }
-      });
-    }, { threshold: 0.1 });
-
-    document.querySelectorAll('.hidden-element').forEach(el => observer.observe(el));
-  });
-</script>
+<footer class="py-12 border-t border-white/10 text-center bg-black/30">
+  <p class="text-[10px] font-cinzel tracking-[0.3em] opacity-40 uppercase mb-4">
+    Portfolio Yanis Benaalma • BTS SIO
+  </p>
+</footer>
 
 </body>
 </html>
