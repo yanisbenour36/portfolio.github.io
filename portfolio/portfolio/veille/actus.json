@@ -1,1 +1,50 @@
-[]
+[
+ {
+  "titre": "When Your Ransomware Negotiator Works for the Other Side",
+  "date": "2026-10-16",
+  "theme": "Ransomware",
+  "source": "Dark Reading",
+  "resume": "Article à lire sur le site de la source.",
+  "lien": "https://www.darkreading.com/cyber-risk/when-your-ransomware-negotiator-works-other-side"
+ },
+ {
+  "titre": "Satellite Images Show Extent of Trump Admin’s Tree-Felling at DC Golf Course",
+  "date": "2026-10-15",
+  "theme": "OSINT",
+  "source": "Bellingcat",
+  "resume": "Article à lire sur le site de la source.",
+  "lien": "https://www.bellingcat.com/news/us-canada/2026/10/15/satellite-images-show-extent-of-trump-admins-tree-felling-at-dc-golf-course/"
+ },
+ {
+  "titre": "Ransomware Gangs Embrace Physical Threats, Family Stalking?",
+  "date": "2026-10-14",
+  "theme": "Ransomware",
+  "source": "Dark Reading",
+  "resume": "Article à lire sur le site de la source.",
+  "lien": "https://www.darkreading.com/cybersecurity-analytics/ransomware-gangs-physical-threats-family-stalking"
+ },
+ {
+  "titre": "Prominent Ransomware Negotiator Faces Extortion Charges",
+  "date": "2026-10-12",
+  "theme": "Ransomware",
+  "source": "Dark Reading",
+  "resume": "Article à lire sur le site de la source.",
+  "lien": "https://www.darkreading.com/insider-threats/prominent-ransomware-negotiator-extortion-charges"
+ },
+ {
+  "titre": "Gear Review: XTEINK X4 Pro",
+  "date": "2026-10-09",
+  "theme": "OSINT",
+  "source": "IntelTechniques",
+  "resume": "Article à lire sur le site de la source.",
+  "lien": "https://inteltechniques.com/blog/posts/2026-10-09-gear-review-xteink-x4-pro.html"
+ },
+ {
+  "titre": "Gear Review: OLYVUE V78 Dash Cam",
+  "date": "2026-10-09",
+  "theme": "OSINT",
+  "source": "IntelTechniques",
+  "resume": "Article à lire sur le site de la source.",
+  "lien": "https://inteltechniques.com/blog/posts/2026-10-09-gear-review-olyvue-v78-dash-cam.html"
+ }
+]
