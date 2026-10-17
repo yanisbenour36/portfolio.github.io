@@ -1,0 +1,16 @@
+<!DOCTYPE html><html lang="fr"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Écrire un script Batch de sauvegarde avec journal | Yanis Benaalma</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Noto+Sans+JP:wght@300;400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+<link rel="stylesheet" href="../assets/style.css"></head><body><nav class="nav"><a href="../index.html">Retour au portfolio</a><a href="../index.html#travaux">Tous les travaux</a></nav><main class="tuto"><span class="th2">Windows</span><h1>Écrire un script Batch de sauvegarde avec journal</h1><p class="lead">Des utilisateurs perdent leurs fichiers. On écrit un petit script que tout le monde peut lancer : il demande quoi sauvegarder, crée un dossier daté, copie les fichiers et garde un journal.</p><div class="meta"><span>Niveau : intermédiaire</span><span>Langage : Batch (.bat)</span></div><h2>Avant de commencer</h2><ul><li>Un éditeur de texte (Bloc-notes) et un dossier de test avec quelques fichiers .txt.</li><li>Script proposé : essayez-le d’abord sur un petit dossier.</li></ul><h2>Les étapes</h2><ol class="steps"><li><h3>Créer le fichier</h3><p>Ouvrez le Bloc-notes et enregistrez-le sous SauvegardeParam.bat (type : Tous les fichiers).</p></li><li><h3>Poser les questions</h3><p>set /p affiche une question et mémorise la réponse dans une variable.</p><pre><code>@echo off
+set /p SRC=Dossier a sauvegarder :
+set /p EXT=Type de fichiers (ex : txt) :
+set /p DEST=Dossier de destination :</code></pre></li><li><h3>Préparer le dossier daté</h3><p>On compose un nom avec la date et l’heure, puis on crée le dossier.</p><pre><code>set STAMP=%DATE:/=-%_%TIME:~0,2%h%TIME:~3,2%
+set STAMP=%STAMP: =0%
+set BK=%DEST%\Backup_%STAMP%
+mkdir &quot;%BK%&quot;</code></pre></li><li><h3>Copier et tenir le journal</h3><p>Le journal garde la date, l’utilisateur, ce qui a été copié, le nombre de fichiers et leur taille.</p><pre><code>echo === RAPPORT DE SAUVEGARDE === &gt; &quot;%BK%\log.txt&quot;
+echo Date : %DATE% %TIME% &gt;&gt; &quot;%BK%\log.txt&quot;
+echo Utilisateur : %USERNAME% sur %COMPUTERNAME% &gt;&gt; &quot;%BK%\log.txt&quot;
+xcopy &quot;%SRC%\*.%EXT%&quot; &quot;%BK%\&quot; /S /I /Y &gt;&gt; &quot;%BK%\log.txt&quot;
+dir &quot;%BK%\*.%EXT%&quot; /S &gt;&gt; &quot;%BK%\log.txt&quot;</code></pre></li><li><h3>Afficher le rapport</h3><p>pause laisse la fenêtre ouverte pour lire le résultat.</p><pre><code>type &quot;%BK%\log.txt&quot;
+pause</code></pre></li></ol><h2>Vérifier que ça marche</h2><p>Lancez le script par double-clic :</p><pre><code>SauvegardeParam.bat</code></pre><p class="note">Un dossier Backup_date est créé avec vos fichiers et un log.txt.</p><h2>À retenir</h2><ul><li>Pour aller plus loin : robocopy gère mieux les fichiers verrouillés, et le Planificateur de tâches peut lancer le script chaque jour.</li></ul><p><a class="btn ghost" href="../pdf/tp5.2.pdf" target="_blank"><i class="fas fa-file-pdf"></i> Voir le compte rendu original (PDF)</a></p></main><footer>Portfolio de Yanis Benaalma, BTS SIO</footer></body></html>

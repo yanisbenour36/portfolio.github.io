@@ -1,0 +1,23 @@
+<!DOCTYPE html><html lang="fr"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CMD et PowerShell : organiser des dossiers et comparer les deux | Yanis Benaalma</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Noto+Sans+JP:wght@300;400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+<link rel="stylesheet" href="../assets/style.css"></head><body><nav class="nav"><a href="../index.html">Retour au portfolio</a><a href="../index.html#travaux">Tous les travaux</a></nav><main class="tuto"><span class="th2">Windows</span><h1>CMD et PowerShell : organiser des dossiers et comparer les deux</h1><p class="lead">Mission d’un technicien de lycée : préparer les espaces de travail des étudiants SISR et SLAM. On crée l’arborescence, on manipule des fichiers, et on compare CMD et PowerShell.</p><div class="meta"><span>Niveau : débutant</span><span>Système : Windows</span></div><h2>Avant de commencer</h2><ul><li>Ouvrez CMD (tapez cmd) et PowerShell (tapez PowerShell) dans le menu Démarrer.</li></ul><h2>Les étapes</h2><ol class="steps"><li><h3>Créer les dossiers principaux</h3><p>La même action s’écrit différemment selon l’outil.</p><pre><code>CMD :
+cd \
+mkdir BTS_SIO TRAVAIL
+
+PowerShell :
+Set-Location C:\
+New-Item BTS_SIO,TRAVAIL -ItemType Directory</code></pre></li><li><h3>Créer les sous-dossiers</h3><p>SISR : systèmes, réseaux, sécurité. SLAM : code, base de données, documentation, tests. TRAVAIL : cours, TP, annexes, temp.</p><pre><code>mkdir BTS_SIO\SISR BTS_SIO\SLAM
+mkdir BTS_SIO\SISR\SYSTEME BTS_SIO\SISR\RESEAUX BTS_SIO\SISR\SECURITE
+mkdir BTS_SIO\SLAM\CODE BTS_SIO\SLAM\BD BTS_SIO\SLAM\DOC BTS_SIO\SLAM\TESTS
+mkdir TRAVAIL\COURS TRAVAIL\TP TRAVAIL\ANNEXES TRAVAIL\TEMP</code></pre></li><li><h3>Enregistrer un listing dans un fichier</h3><p>Le signe &gt; écrit le résultat d’une commande dans un fichier, &gt;&gt; l’ajoute à la fin.</p><pre><code>cd BTS_SIO\SLAM\CODE
+dir &gt; liste1.txt
+dir C:\Windows /o:s &gt; liste2.txt
+dir C:\Windows\*.txt &gt; liste3.txt</code></pre></li><li><h3>Copier, renommer, chercher</h3><p>find cherche un mot dans un fichier.</p><pre><code>copy liste*.txt C:\TRAVAIL\TEMP
+ren liste1.txt file1.txt
+copy file1.txt C:\TRAVAIL\fiche1.txt
+dir &gt;&gt; C:\TRAVAIL\fiche1.txt
+find &quot;Win&quot; C:\TRAVAIL\fiche1.txt</code></pre></li><li><h3>Nettoyer</h3><p>rmdir /s supprime un dossier et tout son contenu : vérifiez le chemin avant.</p><pre><code>del file*
+rmdir C:\TRAVAIL /s
+dir C:\BTS_SIO /s</code></pre></li></ol><h2>Vérifier que ça marche</h2><p>Pour vérifier l’arborescence :</p><pre><code>dir C:\BTS_SIO /s</code></pre><p class="note">Vous devez voir SISR et SLAM avec leurs sous-dossiers.</p><h2>À retenir</h2><ul><li>Équivalences : dir = Get-ChildItem, cd = Set-Location, copy = Copy-Item, ren = Rename-Item, del = Remove-Item, find = Select-String.</li><li>PowerShell est plus puissant mais plus long à écrire ; CMD reste pratique pour les actions rapides.</li></ul><p><a class="btn ghost" href="../pdf/tp5.pdf" target="_blank"><i class="fas fa-file-pdf"></i> Voir le compte rendu original (PDF)</a></p></main><footer>Portfolio de Yanis Benaalma, BTS SIO</footer></body></html>

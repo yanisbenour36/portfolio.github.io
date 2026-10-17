@@ -1,0 +1,18 @@
+<!DOCTYPE html><html lang="fr"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Les commandes CMD du support informatique | Yanis Benaalma</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Noto+Sans+JP:wght@300;400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+<link rel="stylesheet" href="../assets/style.css"></head><body><nav class="nav"><a href="../index.html">Retour au portfolio</a><a href="../index.html#travaux">Tous les travaux</a></nav><main class="tuto"><span class="th2">Windows</span><h1>Les commandes CMD du support informatique</h1><p class="lead">Face à un poste lent ou un utilisateur bloqué, un technicien commence par quelques commandes. Voici les essentielles, rangées par situation, avec la bonne réponse aux exercices.</p><div class="meta"><span>Niveau : débutant</span><span>Système : Windows</span></div><h2>Avant de commencer</h2><ul><li>Un terminal CMD. Pour les comptes et les réparations, ouvrez-le en administrateur.</li></ul><h2>Les étapes</h2><ol class="steps"><li><h3>Poste lent : voir les processus</h3><p>Repérez un programme bloqué ou trop gourmand.</p><pre><code>tasklist
+systeminfo
+hostname</code></pre></li><li><h3>Qui suis-je ? Quel domaine ?</h3><p>Utile quand un utilisateur pense ne pas être reconnu.</p><pre><code>whoami</code></pre></li><li><h3>Problème réseau</h3><p>ipconfig /all montre IP, DNS, passerelle et MAC ; netstat -ano relie chaque connexion à un PID ; arp -a affiche les couples IP / MAC connus.</p><pre><code>ping 8.8.8.8
+tracert srv-pedago
+ipconfig /all
+netstat -ano
+arp -a</code></pre></li><li><h3>Gérer les comptes</h3><p>Supprimer le compte local d’un ancien employé :</p><pre><code>net user
+net user ancienemploye /delete
+net localgroup administrators</code></pre></li><li><h3>Réparer le système</h3><p>sfc répare les fichiers Windows abîmés ; chkdsk C: /f analyse et répare le disque.</p><pre><code>sfc /scannow
+chkdsk C: /f
+taskkill /PID 1234
+tree</code></pre></li><li><h3>Session et accès distant</h3><p>Connecter un partage réseau sur la lettre Z :</p><pre><code>mstsc
+net use Z: \\SERVEUR\PARTAGE
+logoff</code></pre></li></ol><h2>Vérifier que ça marche</h2><p>Pour l’inventaire d’une salle :</p><pre><code>hostname</code></pre><p class="note">Relevez le nom de chaque poste avant une mise à jour.</p><h2>À retenir</h2><ul><li>tracert srv-pedago affiche tous les sauts jusqu’au serveur (l’option -h limite seulement leur nombre).</li><li>Supprimer un compte se fait avec net user nom /delete, pas avec taskkill.</li></ul><p><a class="btn ghost" href="../pdf/tp6.1.pdf" target="_blank"><i class="fas fa-file-pdf"></i> Voir le compte rendu original (PDF)</a></p></main><footer>Portfolio de Yanis Benaalma, BTS SIO</footer></body></html>

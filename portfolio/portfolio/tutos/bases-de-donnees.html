@@ -1,0 +1,16 @@
+<!DOCTYPE html><html lang="fr"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bases de données : types de champs et dictionnaire de données | Yanis Benaalma</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Noto+Sans+JP:wght@300;400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+<link rel="stylesheet" href="../assets/style.css"></head><body><nav class="nav"><a href="../index.html">Retour au portfolio</a><a href="../index.html#travaux">Tous les travaux</a></nav><main class="tuto"><span class="th2">Réseaux et bases de données</span><h1>Bases de données : types de champs et dictionnaire de données</h1><p class="lead">Avant de créer une base, on liste les données et on choisit le bon type pour chacune. Cet outil, le dictionnaire de données, évite des erreurs comme perdre le zéro d’un numéro.</p><div class="meta"><span>Niveau : débutant</span><span>Notions : SGBDR, table, clé primaire</span></div><h2>Avant de commencer</h2><ul><li>Vocabulaire : une table est un tableau (colonnes = champs, lignes = enregistrements). Une clé primaire identifie chaque ligne ; une clé étrangère renvoie vers la clé primaire d’une autre table.</li></ul><h2>Les étapes</h2><ol class="steps"><li><h3>Choisir un type par donnée</h3><p>Taille (1,88 m) : décimal. Temps, vitesse, distance : nombres décimaux. Numéro de département : texte court, car 01 perdrait son zéro en nombre, et 2A, 2B ou 971 existent.</p></li><li><h3>Écrire le dictionnaire des départements</h3><p></p><pre><code>num_dep       CHAR(3)       numéro (01, 2A, 971)
+nom_dep       VARCHAR(50)   nom du département
+superficie    INT           km2
+population    INT           habitants
+densite       DECIMAL(6,1)  habitants par km2</code></pre></li><li><h3>Écrire le dictionnaire d’une fiche d’identité</h3><p>Une date se stocke en type DATE, un téléphone en texte (pour garder le zéro initial).</p><pre><code>nom            VARCHAR(50)
+date_naissance DATE
+nationalite    VARCHAR(30)
+taille         DECIMAL(3,2)
+poids          DECIMAL(5,1)
+adresse        VARCHAR(100)
+telephone      CHAR(10)
+email          VARCHAR(100)</code></pre></li></ol><h2>Vérifier que ça marche</h2><p>Pour vérifier :</p><p class="note">Chaque champ a un type adapté, une longueur et une description.</p><h2>À retenir</h2><ul><li>Types courants : texte, entier, décimal, date et heure, booléen.</li><li>L’âge se calcule depuis la date de naissance : ne le stockez pas.</li></ul><p><a class="btn ghost" href="../pdf/tp5.1.pdf" target="_blank"><i class="fas fa-file-pdf"></i> Voir le compte rendu original (PDF)</a></p></main><footer>Portfolio de Yanis Benaalma, BTS SIO</footer></body></html>

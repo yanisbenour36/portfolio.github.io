@@ -1,0 +1,16 @@
+<!DOCTYPE html><html lang="fr"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Installer les outils de sécurité d’un technicien réseau | Yanis Benaalma</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Noto+Sans+JP:wght@300;400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+<link rel="stylesheet" href="../assets/style.css"></head><body><nav class="nav"><a href="../index.html">Retour au portfolio</a><a href="../index.html#travaux">Tous les travaux</a></nav><main class="tuto"><span class="th2">Cybersécurité</span><h1>Installer les outils de sécurité d’un technicien réseau</h1><p class="lead">Six outils essentiels : scanner un réseau (Nmap), analyser le trafic (Wireshark), bloquer les attaques (Fail2ban), détecter les intrusions (Suricata), simuler un réseau (Packet Tracer) et tester une application web (Burp Suite).</p><div class="meta"><span>Niveau : intermédiaire</span><span>Système : Ubuntu</span></div><h2>Avant de commencer</h2><ul><li>Ubuntu avec Internet. N’utilisez ces outils que sur vos propres machines.</li></ul><h2>Les étapes</h2><ol class="steps"><li><h3>Nmap</h3><p></p><pre><code>sudo apt install nmap
+nmap --version
+nmap 127.0.0.1</code></pre></li><li><h3>Wireshark</h3><p>Répondre Oui à la question sur la capture sans être root, puis ajouter son compte au groupe.</p><pre><code>sudo apt install wireshark
+sudo usermod -aG wireshark $USER</code></pre></li><li><h3>Fail2ban</h3><p>Surveille les journaux et bannit les adresses qui multiplient les tentatives de connexion.</p><pre><code>sudo apt install fail2ban
+sudo fail2ban-client status
+sudo fail2ban-client status sshd</code></pre></li><li><h3>Suricata</h3><p>Absent des dépôts standard : on ajoute le dépôt officiel de l’éditeur.</p><pre><code>sudo add-apt-repository ppa:oisf/suricata-stable
+sudo apt update
+sudo apt install suricata
+suricata --build-info</code></pre></li><li><h3>Packet Tracer (paquet .deb)</h3><p>À télécharger sur Cisco NetAcad. En cas d’erreur de dépendances, la seconde commande les répare.</p><pre><code>sudo dpkg -i ~/Téléchargements/packettracer-version.deb
+sudo apt install -f</code></pre></li><li><h3>Burp Suite Community (archive)</h3><p>Télécharger l’installateur sur le site officiel, le rendre exécutable puis le lancer.</p><pre><code>cd /opt
+sudo chmod +x burpsuite_community_linux.sh
+sudo ./burpsuite_community_linux.sh</code></pre></li></ol><h2>Vérifier que ça marche</h2><p>Pour vérifier :</p><pre><code>nmap --version</code></pre><p class="note">Chaque outil se lance sans erreur.</p><h2>À retenir</h2><ul><li>Sur un serveur en production : Fail2ban et un détecteur d’intrusion comme Suricata. Nmap, Wireshark et Burp servent surtout à l’audit et au diagnostic.</li><li>Un dépôt tiers permet d’obtenir un logiciel récent absent des dépôts standard.</li></ul><p><a class="btn ghost" href="../pdf/TP%20VM%20UBUNTU%20ETAPE%206.pdf" target="_blank"><i class="fas fa-file-pdf"></i> Voir le compte rendu original (PDF)</a></p></main><footer>Portfolio de Yanis Benaalma, BTS SIO</footer></body></html>

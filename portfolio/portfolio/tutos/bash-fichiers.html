@@ -1,0 +1,46 @@
+<!DOCTYPE html><html lang="fr"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bash : créer, déplacer et supprimer des fichiers et dossiers | Yanis Benaalma</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Noto+Sans+JP:wght@300;400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+<link rel="stylesheet" href="../assets/style.css"></head><body><nav class="nav"><a href="../index.html">Retour au portfolio</a><a href="../index.html#travaux">Tous les travaux</a></nav><main class="tuto"><span class="th2">Linux</span><h1>Bash : créer, déplacer et supprimer des fichiers et dossiers</h1><p class="lead">Le terminal Linux (Bash) sert à organiser ses fichiers avec quelques commandes. Huit exercices progressifs : créer des dossiers, déplacer, renommer, supprimer, puis construire de vraies arborescences (site web, application, cours, outils de cybersécurité).</p><div class="meta"><span>Niveau : débutant</span><span>Système : Linux (Ubuntu)</span><span>8 exercices</span></div><h2>Avant de commencer</h2><ul><li>Un terminal Linux.</li><li>Les commandes de base : pwd (où suis-je), ls (lister), mkdir (créer un dossier), cd (entrer dans un dossier), touch (créer un fichier vide), mv (déplacer ou renommer), rm (supprimer), rm -r (supprimer un dossier et son contenu), clear (nettoyer l’écran).</li></ul><h2>Les étapes</h2><ol class="steps"><li><h3>Exercice 1 : dossiers et fichiers</h3><p>Créer un dossier avec deux sous-dossiers, y mettre un fichier, le déplacer, puis supprimer un dossier avec tout son contenu.</p><pre><code>mkdir BashExercises
+cd BashExercises
+mkdir Documents Images
+ls
+touch Documents/notes.txt
+mv Documents/notes.txt Images/
+rm -r Documents
+ls</code></pre><figure class="shot"><img loading="lazy" src="../img/bash/ex1.png" alt="Ma capture : exercice 1"><figcaption>Ma capture : exercice 1</figcaption></figure></li><li><h3>Exercice 2 : renommer un dossier</h3><p>Avec mv, renommer et déplacer sont la même commande.</p><pre><code>mkdir AncienDossier
+mv AncienDossier NouveauDossier
+ls</code></pre><figure class="shot"><img loading="lazy" src="../img/bash/ex2.png" alt="Ma capture : exercice 2"><figcaption>Ma capture : exercice 2</figcaption></figure></li><li><h3>Exercice 3 : plusieurs fichiers d’un coup</h3><p>touch accepte plusieurs noms. clear nettoie l’écran.</p><pre><code>touch fichier1.txt fichier2.txt fichier3.txt
+clear
+ls</code></pre><figure class="shot"><img loading="lazy" src="../img/bash/ex3.png" alt="Ma capture : exercice 3"><figcaption>Ma capture : exercice 3</figcaption></figure></li><li><h3>Exercice 4 : déplacer un fichier</h3><p>Source et destination : on crée deux dossiers et on déplace un fichier de l’un à l’autre.</p><pre><code>mkdir RepertoireSource RepertoireDestination
+touch RepertoireSource/fichier_source.txt
+mv RepertoireSource/fichier_source.txt RepertoireDestination/
+ls RepertoireDestination</code></pre></li><li><h3>Exercice 5 : l’arborescence d’un site web</h3><p>mkdir -p crée plusieurs niveaux d’un coup. On déplace produits.html dans articles, on renomme articles en blog, on supprime contact.html, puis ls -R affiche toute la structure.</p><pre><code>mkdir -p SiteWeb/{css,js,images,pages}
+touch SiteWeb/index.html SiteWeb/images/logo.png
+touch SiteWeb/pages/{accueil,produits,contact}.html
+mkdir SiteWeb/pages/articles
+mv SiteWeb/pages/produits.html SiteWeb/pages/articles/
+mv SiteWeb/pages/articles SiteWeb/pages/blog
+rm SiteWeb/pages/contact.html
+ls -R SiteWeb</code></pre><figure class="shot"><img loading="lazy" src="../img/bash/ex5.png" alt="Ma capture : création du site et déplacement"><figcaption>Ma capture : création du site et déplacement</figcaption></figure><figure class="shot"><img loading="lazy" src="../img/bash/ex5b.png" alt="Ma capture : renommage, suppression et ls"><figcaption>Ma capture : renommage, suppression et ls</figcaption></figure></li><li><h3>Exercice 6 : une application mobile</h3><p>Attention : le dossier activites existe déjà. Renommer activites2 en activites place donc activites2 à l’intérieur (activites/activites). Pour un vrai renommage, choisissez un nom libre.</p><pre><code>mkdir -p ApplicationMobile/{src,activites,ressources/layout,ressources/images,tests}
+touch ApplicationMobile/src/main.java
+touch ApplicationMobile/activites/activite{1,2}.java
+touch ApplicationMobile/ressources/layout/{accueil,parametres}.xml
+touch ApplicationMobile/ressources/images/icone.png
+touch ApplicationMobile/tests/test{1,2}.java
+mkdir ApplicationMobile/activites/activites2
+mv ApplicationMobile/activites/activite1.java ApplicationMobile/activites/activites2/
+rm ApplicationMobile/ressources/layout/parametres.xml
+ls -R ApplicationMobile</code></pre><figure class="shot"><img loading="lazy" src="../img/bash/ex6.png" alt="Ma capture : exercice 6"><figcaption>Ma capture : exercice 6</figcaption></figure></li><li><h3>Exercice 7 : cours et matières</h3><p>rm -r supprime un dossier entier : il n’y a pas de corbeille, vérifiez bien le nom.</p><pre><code>mkdir -p Cours/{Mathematiques,Histoire,Anglais}/{lecons,exercices}
+touch Cours/Mathematiques/lecons/lecon1.txt
+mv Cours/Mathematiques/lecons/lecon1.txt Cours/Histoire/lecons/
+rm -r Cours/Anglais
+ls -R Cours</code></pre><figure class="shot"><img loading="lazy" src="../img/bash/ex7.png" alt="Ma capture : exercice 7"><figcaption>Ma capture : exercice 7</figcaption></figure></li><li><h3>Exercice 8 : outils de cybersécurité</h3><p>On range des outils par catégorie, puis on renomme une catégorie et on supprime un outil. Les guillemets sont nécessaires quand un nom contient des espaces.</p><pre><code>mkdir -p Cybersecurite/{Analyse,Protection,&quot;Gestion des mots de passe&quot;,&quot;Détection d&#x27;intrusion&quot;}
+touch Cybersecurite/Analyse/{Nmap,Wireshark}
+touch Cybersecurite/Protection/{Fail2ban,Firewalld}
+touch &quot;Cybersecurite/Détection d&#x27;intrusion&quot;/{Snort,Suricata}
+touch &quot;Cybersecurite/Gestion des mots de passe&quot;/{KeePassXC,LastPass}
+mv &quot;Cybersecurite/Détection d&#x27;intrusion&quot; &quot;Cybersecurite/Sécurité des Réseaux&quot;
+rm &quot;Cybersecurite/Gestion des mots de passe/LastPass&quot;
+ls -R Cybersecurite</code></pre><figure class="shot"><img loading="lazy" src="../img/bash/ex8.png" alt="Ma capture : exercice 8"><figcaption>Ma capture : exercice 8</figcaption></figure></li></ol><h2>Vérifier que ça marche</h2><p>Pour vérifier chaque exercice :</p><pre><code>ls -R</code></pre><p class="note">ls -R affiche tous les dossiers et sous-dossiers : comparez avec la structure demandée.</p><h2>À retenir</h2><ul><li>mv sert à déplacer et à renommer ; si le nom cible est un dossier qui existe, le fichier est placé dedans.</li><li>rm -r est définitif : pas de corbeille.</li><li>Pour de l’aide : whatis ls, ls --help, man ls.</li></ul></main><footer>Portfolio de Yanis Benaalma, BTS SIO</footer></body></html>

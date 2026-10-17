@@ -1,0 +1,18 @@
+<!DOCTYPE html><html lang="fr"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CMD : administrer et diagnostiquer un poste Windows | Yanis Benaalma</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Noto+Sans+JP:wght@300;400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+<link rel="stylesheet" href="../assets/style.css"></head><body><nav class="nav"><a href="../index.html">Retour au portfolio</a><a href="../index.html#travaux">Tous les travaux</a></nav><main class="tuto"><span class="th2">Windows</span><h1>CMD : administrer et diagnostiquer un poste Windows</h1><p class="lead">Aller plus loin avec CMD : personnaliser la fenêtre, cacher un fichier, surveiller les processus et diagnostiquer le réseau comme un technicien.</p><div class="meta"><span>Niveau : débutant à intermédiaire</span><span>Système : Windows</span></div><h2>Avant de commencer</h2><ul><li>Ouvrez CMD en administrateur : Win + R, tapez cmd, puis Ctrl + Maj + Entrée.</li></ul><h2>Les étapes</h2><ol class="steps"><li><h3>Vérifier l’environnement</h3><p>Affiche le dossier courant et la version de Windows.</p><pre><code>echo %CD%
+ver</code></pre></li><li><h3>Personnaliser la fenêtre</h3><p>color change les couleurs, prompt la présentation de la ligne de commande, title le nom de la fenêtre.</p><pre><code>color 0A
+prompt $T [$P]$G
+title Session_Admin_CMD</code></pre></li><li><h3>Cacher un fichier</h3><p>L’attribut +H rend un fichier invisible dans dir ; l’option /A affiche tout, même les fichiers cachés.</p><pre><code>mkdir TP_CMD\Documents
+echo CONTENU_SECRET &gt; TP_CMD\Documents\fichier_cache.txt
+attrib +H TP_CMD\Documents\fichier_cache.txt
+dir TP_CMD\Documents
+dir TP_CMD\Documents /A</code></pre></li><li><h3>Repérer et fermer un processus</h3><p>Lancez le Bloc-notes et Paint, trouvez leur numéro (PID), puis fermez-les. /F force la fermeture, /T ferme aussi les processus enfants.</p><pre><code>tasklist | findstr &quot;notepad mspaint&quot;
+taskkill /PID 1234 /F
+taskkill /IM notepad.exe /T</code></pre></li><li><h3>Tester la connexion réseau</h3><p>ping vérifie qu’une machine répond, tracert montre les routeurs traversés, pathping ajoute la perte de paquets, nslookup teste le DNS.</p><pre><code>ping 8.8.8.8 -n 4
+tracert google.com
+pathping google.com
+nslookup google.com</code></pre></li><li><h3>Voir les connexions actives</h3><p>netstat -ano liste les connexions, les ports et le PID du programme concerné.</p><pre><code>netstat -ano
+netstat -an | find &quot;:80&quot;</code></pre></li></ol><h2>Vérifier que ça marche</h2><p>Pour le réseau :</p><pre><code>ipconfig /all</code></pre><p class="note">Notez l’adresse MAC et si le DHCP est activé (attribution automatique de l’adresse IP).</p><h2>À retenir</h2><ul><li>Le DHCP distribue automatiquement adresse IP, passerelle et DNS.</li><li>Un processus système fermé par erreur peut rendre Windows instable.</li></ul><p><a class="btn ghost" href="../pdf/tp4.2.pdf" target="_blank"><i class="fas fa-file-pdf"></i> Voir le compte rendu original (PDF)</a></p></main><footer>Portfolio de Yanis Benaalma, BTS SIO</footer></body></html>

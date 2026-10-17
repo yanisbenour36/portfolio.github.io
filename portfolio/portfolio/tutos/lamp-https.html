@@ -1,0 +1,23 @@
+<!DOCTYPE html><html lang="fr"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sécuriser un serveur web : HTTPS, PHP, MariaDB et phpMyAdmin | Yanis Benaalma</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Noto+Sans+JP:wght@300;400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+<link rel="stylesheet" href="../assets/style.css"></head><body><nav class="nav"><a href="../index.html">Retour au portfolio</a><a href="../index.html#travaux">Tous les travaux</a></nav><main class="tuto"><span class="th2">Serveurs web</span><h1>Sécuriser un serveur web : HTTPS, PHP, MariaDB et phpMyAdmin</h1><p class="lead">HTTPS chiffre les échanges entre le navigateur et le serveur. Ce tuto ajoute HTTPS à Apache, puis PHP, la base de données MariaDB et l’interface phpMyAdmin.</p><div class="meta"><span>Niveau : intermédiaire</span><span>Prérequis : tuto Apache</span></div><h2>Avant de commencer</h2><ul><li>Un Apache fonctionnel et un site monsite.fr (voir le tuto Apache).</li></ul><h2>Les étapes</h2><ol class="steps"><li><h3>Activer SSL et créer un certificat de test</h3><p>Un certificat auto-signé suffit pour s’entraîner ; en vrai on utilise Let’s Encrypt. Indiquer monsite.fr comme Common Name.</p><pre><code>sudo a2enmod ssl
+sudo systemctl restart apache2
+sudo openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/ssl/private/apache-selfsigned.key -out /etc/ssl/certs/apache-selfsigned.crt</code></pre></li><li><h3>Créer le VirtualHost HTTPS</h3><p>Fichier /etc/apache2/sites-available/monsite-ssl.conf :</p><pre><code>&lt;VirtualHost *:443&gt;
+  ServerName monsite.fr
+  DocumentRoot /var/www/mon_serveur
+  SSLEngine on
+  SSLCertificateFile /etc/ssl/certs/apache-selfsigned.crt
+  SSLCertificateKeyFile /etc/ssl/private/apache-selfsigned.key
+&lt;/VirtualHost&gt;</code></pre></li><li><h3>Activer et tester</h3><p>L’avertissement du navigateur est normal avec un certificat local.</p><pre><code>sudo a2ensite monsite-ssl.conf
+sudo apache2ctl configtest
+sudo systemctl restart apache2</code></pre></li><li><h3>Installer PHP</h3><p>PHP fabrique les pages dynamiques côté serveur. Créez info.php contenant &lt;?php phpinfo(); ?&gt; pour tester.</p><pre><code>sudo apt install php libapache2-mod-php php-mysql
+sudo systemctl restart apache2</code></pre></li><li><h3>Installer et sécuriser MariaDB</h3><p>mysql_secure_installation supprime les accès dangereux par défaut. Choisissez votre propre mot de passe.</p><pre><code>sudo apt install mariadb-server
+sudo mysql_secure_installation
+sudo mysql
+CREATE DATABASE testweb;
+CREATE USER &#x27;webuser&#x27;@&#x27;localhost&#x27; IDENTIFIED BY &#x27;MOT_DE_PASSE&#x27;;
+GRANT ALL PRIVILEGES ON testweb.* TO &#x27;webuser&#x27;@&#x27;localhost&#x27;;</code></pre></li><li><h3>Installer phpMyAdmin et le limiter</h3><p>Ajouter « Require local » dans /etc/apache2/conf-available/phpmyadmin.conf pour n’autoriser que la machine locale.</p><pre><code>sudo apt install phpmyadmin
+sudo ln -s /usr/share/phpmyadmin /var/www/html/phpmyadmin
+sudo systemctl reload apache2</code></pre></li></ol><h2>Vérifier que ça marche</h2><p>Dans le navigateur :</p><pre><code>https://monsite.fr</code></pre><p class="note">Le site s’ouvre en HTTPS, info.php s’affiche et phpMyAdmin répond en local.</p><h2>À retenir</h2><ul><li>HTTPS apporte confidentialité, intégrité et authentification.</li><li>Architecture : Apache sert, PHP calcule, MariaDB stocke ; phpMyAdmin les administre.</li><li>Choisissez toujours un mot de passe fort, jamais celui d’un exemple.</li></ul><p><a class="btn ghost" href="../pdf/TP%20VM%20UBUNTU%20ETAPE%208.2.pdf" target="_blank"><i class="fas fa-file-pdf"></i> Voir le compte rendu original (PDF)</a></p></main><footer>Portfolio de Yanis Benaalma, BTS SIO</footer></body></html>

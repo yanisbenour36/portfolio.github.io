@@ -1,0 +1,18 @@
+<!DOCTYPE html><html lang="fr"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Linux : les commandes fondamentales du shell | Yanis Benaalma</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Noto+Sans+JP:wght@300;400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+<link rel="stylesheet" href="../assets/style.css"></head><body><nav class="nav"><a href="../index.html">Retour au portfolio</a><a href="../index.html#travaux">Tous les travaux</a></nav><main class="tuto"><span class="th2">Linux</span><h1>Linux : les commandes fondamentales du shell</h1><p class="lead">Le shell est l’interface en ligne de commande de Linux. Voici les commandes de base pour s’informer, se déplacer, créer, copier, lier et comparer des fichiers.</p><div class="meta"><span>Niveau : débutant</span><span>Système : Ubuntu</span></div><h2>Avant de commencer</h2><ul><li>Un terminal. Le symbole $ est l’invite : ne le tapez pas. La touche Tab complète les noms ; les flèches haut et bas rappellent l’historique.</li></ul><h2>Les étapes</h2><ol class="steps"><li><h3>S’informer sur le système</h3><p></p><pre><code>uname -a
+whoami
+date
+cal</code></pre></li><li><h3>Se déplacer</h3><p>~ désigne votre dossier personnel, .. le dossier parent, . le dossier courant.</p><pre><code>pwd
+cd ~
+cd ..
+ls -l</code></pre></li><li><h3>Créer</h3><p>touch crée un fichier vide, cat l’affiche.</p><pre><code>mkdir tp
+cd tp
+touch a.txt
+echo bonjour &gt; a.txt
+cat a.txt</code></pre></li><li><h3>Copier, déplacer, supprimer</h3><p></p><pre><code>cp a.txt b.txt
+mv b.txt c.txt
+rm c.txt</code></pre></li><li><h3>Créer des liens</h3><p>ln -s crée un raccourci (lien symbolique) vers un fichier.</p><pre><code>ln a.txt lien-dur.txt
+ln -s a.txt raccourci.txt</code></pre></li><li><h3>Comparer deux fichiers</h3><p></p><pre><code>diff a.txt lien-dur.txt</code></pre></li></ol><h2>Vérifier que ça marche</h2><p>Pour vérifier :</p><pre><code>ls -l</code></pre><p class="note">Le raccourci s’affiche avec une flèche vers a.txt.</p><h2>À retenir</h2><ul><li>Chaque commande suit la forme : commande, options, arguments.</li><li>Utilisez man commande pour l’aide complète.</li></ul><p><a class="btn ghost" href="../pdf/linuxcmd.pdf" target="_blank"><i class="fas fa-file-pdf"></i> Voir le compte rendu original (PDF)</a></p></main><footer>Portfolio de Yanis Benaalma, BTS SIO</footer></body></html>

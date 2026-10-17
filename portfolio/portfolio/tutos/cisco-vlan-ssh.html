@@ -1,0 +1,51 @@
+<!DOCTYPE html><html lang="fr"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sécuriser un switch Cisco : mot de passe, SSH et VLAN | Yanis Benaalma</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Noto+Sans+JP:wght@300;400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+<link rel="stylesheet" href="../assets/style.css"></head><body><nav class="nav"><a href="../index.html">Retour au portfolio</a><a href="../index.html#travaux">Tous les travaux</a></nav><main class="tuto"><span class="th2">Réseaux</span><h1>Sécuriser un switch Cisco : mot de passe, SSH et VLAN</h1><p class="lead">Un switch neuf n’a ni mot de passe ni protection : n’importe qui peut le brancher et le reconfigurer. Ce tuto le transforme pas à pas en équipement sécurisé, avec deux réseaux séparés (VLAN) et un accès d’administration chiffré (SSH).</p><div class="meta"><span>Durée : environ 1 h 30</span><span>Niveau : débutant</span><span>Outil : Cisco Packet Tracer</span></div><h2>Avant de commencer</h2><ul><li>Un switch Cisco 2960 et trois PC : PC1 sur Fa0/1, PC2 sur Fa0/2 et PCA (administration) sur Fa0/3.</li><li>Plan d’adressage : VLAN 1 (gestion) 192.168.1.0/24 avec le switch en 192.168.1.1 ; VLAN 10 « SALES » 192.168.10.0/24 ; VLAN 20 « ADMIN » 192.168.20.0/24.</li></ul><h2>Les étapes</h2><ol class="steps"><li><h3>Nommer le switch et protéger le mode privilégié</h3><p>enable secret stocke le mot de passe chiffré, contrairement à l’ancien enable password.</p><pre><code>enable
+configure terminal
+hostname SW1
+enable secret cisco123
+banner motd #UNAUTHORIZED ACCESS IS PROHIBITED#</code></pre></li><li><h3>Protéger la console et l’accès à distance</h3><p>La console est l’accès physique par câble ; les lignes vty 0 15 sont les 16 connexions possibles à distance. On exige un mot de passe et on coupe une session inactive après 10 min 30.</p><pre><code>line console 0
+ password cisco
+ login
+ exec-timeout 10 30
+ logging synchronous
+exit
+line vty 0 15
+ password cisco
+ login
+ exec-timeout 10 30
+ logging synchronous
+exit</code></pre></li><li><h3>Activer SSH</h3><p>SSH chiffre la connexion, contrairement à Telnet. L’ordre compte : le nom de domaine doit exister avant la clé RSA. Taille de clé : 1024 dans le TP, 2048 conseillée aujourd’hui.</p><pre><code>ip domain-name sisr.local
+crypto key generate rsa
+username admin secret cisco
+line vty 0 15
+ login local
+ transport input ssh
+exit
+ip ssh version 2</code></pre></li><li><h3>Chiffrer les mots de passe restants</h3><p>Cette commande masque les mots de passe de type « password » dans la configuration. Le chiffrement est faible, mais évite un coup d’œil indiscret.</p><pre><code>service password-encryption</code></pre></li><li><h3>Créer les VLAN et y brancher les PC</h3><p>Un VLAN découpe le switch en réseaux séparés : PC1 et PC2 ne peuvent plus se parler directement (il faudra un routeur).</p><pre><code>vlan 10
+ name SALES
+vlan 20
+ name ADMIN
+exit
+interface fa0/1
+ switchport mode access
+ switchport access vlan 10
+interface fa0/2
+ switchport mode access
+ switchport access vlan 20
+exit</code></pre></li><li><h3>Protéger le port de PC1 (port-security)</h3><p>Seule la première adresse MAC vue sur Fa0/1 est acceptée. Un autre appareil coupe le port (état err-disabled). Pour le rallumer : shutdown puis no shutdown.</p><pre><code>interface fa0/1
+ switchport port-security
+ switchport port-security maximum 1
+ switchport port-security mac-address sticky
+ switchport port-security violation shutdown
+exit</code></pre></li><li><h3>Donner une adresse IP de gestion</h3><p>Un switch n’a pas besoin d’IP pour commuter, mais il en faut une pour l’administrer à distance.</p><pre><code>interface vlan 1
+ ip address 192.168.1.1 255.255.255.0
+ no shutdown
+exit
+ip default-gateway 192.168.1.254
+end</code></pre></li><li><h3>Sauvegarder</h3><p>Sans cette étape, toute la configuration disparaît au redémarrage.</p><pre><code>copy running-config startup-config</code></pre></li></ol><h2>Vérifier que ça marche</h2><p>Sur le switch :</p><pre><code>show vlan brief
+show port-security
+show port-security interface fa0/1
+show ip ssh</code></pre><p class="note">Depuis PCA, la connexion SSH doit demander le mot de passe et s’ouvrir ; Telnet doit être refusé :<br>ssh -l admin 192.168.1.1</p><h2>À retenir</h2><ul><li>Les pièges classiques : oublier no shutdown sur l’interface VLAN 1, créer la clé RSA avant le nom de domaine, laisser transport input all.</li><li>Les mots de passe « cisco » servent à l’entraînement : en entreprise, on en choisit de longs et uniques.</li><li>Pour tester le port-security, branchez une machine différente : le même PC ne déclenche rien.</li></ul><p><a class="btn ghost" href="../pdf/vlan.pdf" target="_blank"><i class="fas fa-file-pdf"></i> Voir le compte rendu original (PDF)</a></p></main><footer>Portfolio de Yanis Benaalma, BTS SIO</footer></body></html>

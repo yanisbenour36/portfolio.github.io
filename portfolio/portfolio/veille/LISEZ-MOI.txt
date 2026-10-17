@@ -1,0 +1,4 @@
+actus.json = actualités affichées dans « Dernières actualités » (6 maximum, vides = section cachée).
+Format d'un élément :
+{"titre": "...", "date": "AAAA-MM-JJ", "theme": "OSINT ou Ransomware", "source": "CERT-FR", "resume": "une phrase", "lien": "https://..."}
+La tâche planifiée écrit seulement dans brouillon-actus.json. Vous relisez, puis vous copiez les éléments validés dans actus.json et vous publiez.

@@ -1,0 +1,21 @@
+<!DOCTYPE html><html lang="fr"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CMD : naviguer et gérer des fichiers en ligne de commande | Yanis Benaalma</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Noto+Sans+JP:wght@300;400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+<link rel="stylesheet" href="../assets/style.css"></head><body><nav class="nav"><a href="../index.html">Retour au portfolio</a><a href="../index.html#travaux">Tous les travaux</a></nav><main class="tuto"><span class="th2">Windows</span><h1>CMD : naviguer et gérer des fichiers en ligne de commande</h1><p class="lead">L’invite de commandes (CMD) permet de piloter Windows en tapant des ordres au lieu de cliquer. Ce tuto apprend à se déplacer, créer, copier et supprimer des fichiers, puis à lire les infos du système.</p><div class="meta"><span>Niveau : débutant</span><span>Système : Windows (VM Tiny10)</span></div><h2>Avant de commencer</h2><ul><li>Une machine Windows. Ouvrez CMD : menu Démarrer, tapez cmd, Entrée.</li></ul><h2>Les étapes</h2><ol class="steps"><li><h3>Se repérer et se déplacer</h3><p>cd .. remonte d’un dossier. cd seul affiche le dossier où vous êtes. La touche Tab complète les noms.</p><pre><code>help
+cd \
+cd Windows
+cd ..</code></pre></li><li><h3>Lister le contenu d’un dossier</h3><p>dir /w affiche les noms sur plusieurs colonnes, dir /p fait une pause à chaque écran.</p><pre><code>dir
+dir /w
+dir /p</code></pre></li><li><h3>Créer, renommer et supprimer</h3><p>del supprime un fichier, rmdir un dossier vide (il refuse s’il contient quelque chose).</p><pre><code>mkdir TestCMD
+ren TestCMD MonDossierCMD
+echo Hello &gt; MonDossierCMD\fichier.txt
+del MonDossierCMD\fichier.txt
+rmdir MonDossierCMD</code></pre></li><li><h3>Copier des fichiers</h3><p>xcopy sait aussi copier des dossiers ; avec /s il inclut les sous-dossiers.</p><pre><code>echo Salut &gt; source.txt
+copy source.txt destination.txt
+mkdir Cible
+xcopy source.txt Cible\</code></pre></li><li><h3>Lire les infos système et réseau</h3><p>ipconfig donne l’adresse IP, la passerelle et le DNS ; ipconfig /all ajoute l’adresse MAC et l’état du DHCP.</p><pre><code>winver
+ipconfig
+ipconfig /all</code></pre></li><li><h3>Gérer les processus</h3><p>tasklist liste les programmes en cours, taskkill en ferme un (/f force la fermeture).</p><pre><code>tasklist
+tasklist | find &quot;notepad&quot;
+taskkill /im notepad.exe /f</code></pre></li></ol><h2>Vérifier que ça marche</h2><p>À la fin :</p><pre><code>dir</code></pre><p class="note">Vous devez voir source.txt, destination.txt et le dossier Cible, et aucun dossier TestCMD.</p><h2>À retenir</h2><ul><li>del supprime des fichiers, rmdir des dossiers.</li><li>Soyez prudent avec taskkill et rmdir /s : ils peuvent supprimer ou fermer des choses importantes sans confirmation.</li></ul><p><a class="btn ghost" href="../pdf/tp4.pdf" target="_blank"><i class="fas fa-file-pdf"></i> Voir le compte rendu original (PDF)</a></p></main><footer>Portfolio de Yanis Benaalma, BTS SIO</footer></body></html>

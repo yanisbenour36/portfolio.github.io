@@ -1,0 +1,30 @@
+<!DOCTYPE html><html lang="fr"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Installer un serveur web Apache et héberger un site | Yanis Benaalma</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Noto+Sans+JP:wght@300;400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+<link rel="stylesheet" href="../assets/style.css"></head><body><nav class="nav"><a href="../index.html">Retour au portfolio</a><a href="../index.html#travaux">Tous les travaux</a></nav><main class="tuto"><span class="th2">Serveurs web</span><h1>Installer un serveur web Apache et héberger un site</h1><p class="lead">Un serveur web envoie des pages à un navigateur. Ce tuto installe Apache sur Ubuntu, vérifie qu’il fonctionne, puis héberge un second site sous son propre nom grâce à un VirtualHost.</p><div class="meta"><span>Niveau : débutant</span><span>Système : Ubuntu en machine virtuelle</span></div><h2>Avant de commencer</h2><ul><li>Une machine Ubuntu avec accès à Internet et un compte qui peut utiliser sudo.</li><li>Dans le TP, le nom du site est votre_login.fr ; ici, on utilise monsite.fr.</li></ul><h2>Les étapes</h2><ol class="steps"><li><h3>Installer et démarrer Apache</h3><p>enable lance Apache automatiquement à chaque démarrage. Ouvrez ensuite http://localhost : la page « Apache2 Ubuntu Default Page » doit s’afficher.</p><pre><code>sudo apt update
+sudo apt install apache2
+sudo systemctl start apache2
+sudo systemctl enable apache2</code></pre></li><li><h3>Repérer où se trouve la configuration</h3><p>sites-available contient les sites possibles, sites-enabled les sites actifs (des liens vers les premiers). mods-available et mods-enabled font de même pour les modules.</p><pre><code>cd /etc/apache2
+ls</code></pre></li><li><h3>Créer votre site</h3><p>Apache travaille dans /var/www. Le lien symbolique permet de garder vos fichiers dans votre dossier personnel.</p><pre><code>mkdir ~/mon_serveur
+nano ~/mon_serveur/index.html
+chmod 755 ~/mon_serveur
+sudo ln -s $HOME/mon_serveur /var/www/mon_serveur</code></pre></li><li><h3>Donner un nom au site</h3><p>Sans vrai DNS, le fichier /etc/hosts dit à votre ordinateur que monsite.fr, c’est lui-même. Ajoutez cette ligne :</p><pre><code>sudo nano /etc/hosts
+
+127.0.0.1  monsite.fr</code></pre></li><li><h3>Écrire le VirtualHost</h3><p>Un VirtualHost décrit un site : son nom, son dossier et les accès autorisés. On copie le modèle par défaut puis on le modifie.</p><pre><code>cd /etc/apache2/sites-available
+sudo cp 000-default.conf monsite.conf
+sudo nano monsite.conf
+
+&lt;VirtualHost *:80&gt;
+  ServerName monsite.fr
+  DocumentRoot /var/www/mon_serveur
+  ErrorLog ${APACHE_LOG_DIR}/mon_serveur_error.log
+  CustomLog ${APACHE_LOG_DIR}/mon_serveur_access.log combined
+  &lt;Directory /var/www/mon_serveur&gt;
+    Options FollowSymLinks MultiViews
+    AllowOverride None
+    Require all granted
+  &lt;/Directory&gt;
+&lt;/VirtualHost&gt;</code></pre></li><li><h3>Activer le site et vérifier</h3><p>configtest doit répondre Syntax OK. Un avertissement sur le ServerName du serveur est sans gravité.</p><pre><code>sudo a2ensite monsite.conf
+sudo apache2ctl configtest
+sudo systemctl reload apache2</code></pre></li></ol><h2>Vérifier que ça marche</h2><p>Dans le navigateur :</p><pre><code>http://monsite.fr</code></pre><p class="note">Votre page index.html doit s’afficher, et non la page par défaut d’Apache.</p><h2>À retenir</h2><ul><li>Un seul Apache peut héberger plusieurs sites, chacun avec son VirtualHost.</li><li>Pour activer un site : a2ensite. Pour le couper : a2dissite.</li><li>Bonne pratique : retirer l’option Indexes qui affiche la liste des fichiers d’un dossier (fuite d’informations).</li></ul><p><a class="btn ghost" href="../pdf/TP%20VM%20UBUNTU%20ETAPE%208.1.pdf" target="_blank"><i class="fas fa-file-pdf"></i> Voir le compte rendu original (PDF)</a></p></main><footer>Portfolio de Yanis Benaalma, BTS SIO</footer></body></html>
