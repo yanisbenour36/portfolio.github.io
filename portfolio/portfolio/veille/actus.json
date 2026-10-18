@@ -1,5 +1,13 @@
 [
  {
+  "titre": "Drive Specifications Matter (Complete)",
+  "date": "2026-10-18",
+  "theme": "OSINT",
+  "source": "IntelTechniques",
+  "resume": "Article à lire sur le site de la source.",
+  "lien": "https://inteltechniques.com/blog/posts/2026-10-18-drive-specifications-matter.html"
+ },
+ {
   "titre": "When Your Ransomware Negotiator Works for the Other Side",
   "date": "2026-10-16",
   "theme": "Ransomware",
@@ -38,13 +46,5 @@
   "source": "IntelTechniques",
   "resume": "Article à lire sur le site de la source.",
   "lien": "https://inteltechniques.com/blog/posts/2026-10-09-gear-review-xteink-x4-pro.html"
- },
- {
-  "titre": "Gear Review: OLYVUE V78 Dash Cam",
-  "date": "2026-10-09",
-  "theme": "OSINT",
-  "source": "IntelTechniques",
-  "resume": "Article à lire sur le site de la source.",
-  "lien": "https://inteltechniques.com/blog/posts/2026-10-09-gear-review-olyvue-v78-dash-cam.html"
  }
 ]
