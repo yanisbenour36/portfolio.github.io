@@ -1,5 +1,21 @@
 [
  {
+  "titre": "High-Severity Flaws Exploited in Three Days as Ransomware Dominates Q3: Rapid7",
+  "date": "2026-10-21",
+  "theme": "Ransomware",
+  "source": "SecurityWeek",
+  "resume": "Article à lire sur le site de la source.",
+  "lien": "https://www.securityweek.com/high-severity-flaws-exploited-in-three-days-as-ransomware-dominates-q3-rapid7/"
+ },
+ {
+  "titre": "CISA: SafePay ransomware hit over 600 critical infrastructure orgs",
+  "date": "2026-10-21",
+  "theme": "Ransomware",
+  "source": "BleepingComputer",
+  "resume": "Article à lire sur le site de la source.",
+  "lien": "https://www.bleepingcomputer.com/news/security/cisa-and-fbi-safepay-ransomware-has-hit-over-600-critical-infrastructure-organizations/"
+ },
+ {
   "titre": "Qilin and INC Ransomware Groups Exploit Palo Alto Networks Flaw to Bypass MFA",
   "date": "2026-10-20",
   "theme": "Ransomware",
@@ -16,28 +32,12 @@
   "lien": "https://inteltechniques.com/blog/posts/2026-10-18-drive-specifications-matter.html"
  },
  {
-  "titre": "When Your Ransomware Negotiator Works for the Other Side",
-  "date": "2026-10-16",
-  "theme": "Ransomware",
-  "source": "Dark Reading",
-  "resume": "Article à lire sur le site de la source.",
-  "lien": "https://www.darkreading.com/cyber-risk/when-your-ransomware-negotiator-works-other-side"
- },
- {
   "titre": "Satellite Images Show Extent of Trump Admin’s Tree-Felling at DC Golf Course",
   "date": "2026-10-15",
   "theme": "OSINT",
   "source": "Bellingcat",
   "resume": "Article à lire sur le site de la source.",
   "lien": "https://www.bellingcat.com/news/us-canada/2026/10/15/satellite-images-show-extent-of-trump-admins-tree-felling-at-dc-golf-course/"
- },
- {
-  "titre": "Ransomware Gangs Embrace Physical Threats, Family Stalking?",
-  "date": "2026-10-14",
-  "theme": "Ransomware",
-  "source": "Dark Reading",
-  "resume": "Article à lire sur le site de la source.",
-  "lien": "https://www.darkreading.com/cybersecurity-analytics/ransomware-gangs-physical-threats-family-stalking"
  },
  {
   "titre": "Gear Review: XTEINK X4 Pro",
