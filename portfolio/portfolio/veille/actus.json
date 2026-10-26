@@ -1,19 +1,19 @@
 [
  {
+  "titre": "Attackers Use Microsoft Teams IT Support Scams to Deploy Malware and Ransomware",
+  "date": "2026-10-26",
+  "theme": "Ransomware",
+  "source": "The Hacker News",
+  "resume": "Article à lire sur le site de la source.",
+  "lien": "https://thehackernews.com/2026/10/attackers-use-microsoft-teams-it.html"
+ },
+ {
   "titre": "Exposed Infrastructure Reveals How Ransomware Affiliates Used AI Agents to Execute Intrusions",
   "date": "2026-10-23",
   "theme": "Ransomware",
   "source": "The Hacker News",
   "resume": "Article à lire sur le site de la source.",
   "lien": "https://thehackernews.com/2026/10/exposed-infrastructure-reveals-how.html"
- },
- {
-  "titre": "In Other News: Tor Exit Relays Hijacked, Banks Spot Rogue AI Agents, Self-Rebuilding macOS Ransomware",
-  "date": "2026-10-23",
-  "theme": "Ransomware",
-  "source": "SecurityWeek",
-  "resume": "Article à lire sur le site de la source.",
-  "lien": "https://www.securityweek.com/in-other-news-tor-exit-relays-hijacked-banks-spot-rogue-ai-agents-self-rebuilding-macos-ransomware/"
  },
  {
   "titre": "Can LLMs Supercharge Geolocations? Our Tests Show Big Improvements But Humans Remain Key",
