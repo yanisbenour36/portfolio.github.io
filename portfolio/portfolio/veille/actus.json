@@ -1,19 +1,27 @@
 [
  {
-  "titre": "Attackers Use Microsoft Teams IT Support Scams to Deploy Malware and Ransomware",
-  "date": "2026-10-26",
+  "titre": "Ukrainian Hive and Nefilim Ransomware Affiliate Gets 70 Months in US Prison",
+  "date": "2026-10-28",
   "theme": "Ransomware",
-  "source": "The Hacker News",
+  "source": "SecurityWeek",
   "resume": "Article à lire sur le site de la source.",
-  "lien": "https://thehackernews.com/2026/10/attackers-use-microsoft-teams-it.html"
+  "lien": "https://www.securityweek.com/ukrainian-hive-and-nefilim-ransomware-affiliate-gets-70-months-in-us-prison/"
  },
  {
-  "titre": "Exposed Infrastructure Reveals How Ransomware Affiliates Used AI Agents to Execute Intrusions",
-  "date": "2026-10-23",
+  "titre": "Nefilim and Hive ransomware affiliate gets 70 months in prison",
+  "date": "2026-10-28",
   "theme": "Ransomware",
-  "source": "The Hacker News",
+  "source": "BleepingComputer",
   "resume": "Article à lire sur le site de la source.",
-  "lien": "https://thehackernews.com/2026/10/exposed-infrastructure-reveals-how.html"
+  "lien": "https://www.bleepingcomputer.com/news/security/nefilim-and-hive-ransomware-affiliate-gets-70-months-in-prison/"
+ },
+ {
+  "titre": "Japan's GMO urges customers to shut down PCs amid ransomware threat",
+  "date": "2026-10-27",
+  "theme": "Ransomware",
+  "source": "BleepingComputer",
+  "resume": "Article à lire sur le site de la source.",
+  "lien": "https://www.bleepingcomputer.com/news/security/japans-gmo-urges-customers-to-shut-down-pcs-amid-ransomware-threat/"
  },
  {
   "titre": "Can LLMs Supercharge Geolocations? Our Tests Show Big Improvements But Humans Remain Key",
@@ -30,14 +38,6 @@
   "source": "IntelTechniques",
   "resume": "Article à lire sur le site de la source.",
   "lien": "https://inteltechniques.com/blog/posts/2026-10-18-drive-specifications-matter.html"
- },
- {
-  "titre": "When Your Ransomware Negotiator Works for the Other Side",
-  "date": "2026-10-16",
-  "theme": "Ransomware",
-  "source": "Dark Reading",
-  "resume": "Article à lire sur le site de la source.",
-  "lien": "https://www.darkreading.com/cyber-risk/when-your-ransomware-negotiator-works-other-side"
  },
  {
   "titre": "Satellite Images Show Extent of Trump Admin’s Tree-Felling at DC Golf Course",
