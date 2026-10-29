@@ -1,27 +1,11 @@
 [
  {
-  "titre": "Ukrainian Hive and Nefilim Ransomware Affiliate Gets 70 Months in US Prison",
-  "date": "2026-10-28",
+  "titre": "Attackers Use Microsoft Teams IT Support Scams to Deploy Malware and Ransomware",
+  "date": "2026-10-26",
   "theme": "Ransomware",
-  "source": "SecurityWeek",
+  "source": "The Hacker News",
   "resume": "Article à lire sur le site de la source.",
-  "lien": "https://www.securityweek.com/ukrainian-hive-and-nefilim-ransomware-affiliate-gets-70-months-in-us-prison/"
- },
- {
-  "titre": "Nefilim and Hive ransomware affiliate gets 70 months in prison",
-  "date": "2026-10-28",
-  "theme": "Ransomware",
-  "source": "BleepingComputer",
-  "resume": "Article à lire sur le site de la source.",
-  "lien": "https://www.bleepingcomputer.com/news/security/nefilim-and-hive-ransomware-affiliate-gets-70-months-in-prison/"
- },
- {
-  "titre": "Japan's GMO urges customers to shut down PCs amid ransomware threat",
-  "date": "2026-10-27",
-  "theme": "Ransomware",
-  "source": "BleepingComputer",
-  "resume": "Article à lire sur le site de la source.",
-  "lien": "https://www.bleepingcomputer.com/news/security/japans-gmo-urges-customers-to-shut-down-pcs-amid-ransomware-threat/"
+  "lien": "https://thehackernews.com/2026/10/attackers-use-microsoft-teams-it.html"
  },
  {
   "titre": "Can LLMs Supercharge Geolocations? Our Tests Show Big Improvements But Humans Remain Key",
