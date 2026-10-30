@@ -1,11 +1,11 @@
 [
  {
-  "titre": "Attackers Use Microsoft Teams IT Support Scams to Deploy Malware and Ransomware",
-  "date": "2026-10-26",
-  "theme": "Ransomware",
-  "source": "The Hacker News",
+  "titre": "EU Satellite Imagery Delayed Over Gaza and Parts of West Bank by 24-hours",
+  "date": "2026-10-29",
+  "theme": "OSINT",
+  "source": "Bellingcat",
   "resume": "Article à lire sur le site de la source.",
-  "lien": "https://thehackernews.com/2026/10/attackers-use-microsoft-teams-it.html"
+  "lien": "https://www.bellingcat.com/news/2026/10/29/eu-satellite-imagery-delayed-over-gaza-and-parts-of-west-bank-by-24-hours/"
  },
  {
   "titre": "Can LLMs Supercharge Geolocations? Our Tests Show Big Improvements But Humans Remain Key",
@@ -22,13 +22,5 @@
   "source": "IntelTechniques",
   "resume": "Article à lire sur le site de la source.",
   "lien": "https://inteltechniques.com/blog/posts/2026-10-18-drive-specifications-matter.html"
- },
- {
-  "titre": "Satellite Images Show Extent of Trump Admin’s Tree-Felling at DC Golf Course",
-  "date": "2026-10-15",
-  "theme": "OSINT",
-  "source": "Bellingcat",
-  "resume": "Article à lire sur le site de la source.",
-  "lien": "https://www.bellingcat.com/news/us-canada/2026/10/15/satellite-images-show-extent-of-trump-admins-tree-felling-at-dc-golf-course/"
  }
 ]
