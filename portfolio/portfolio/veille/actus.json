@@ -1,5 +1,21 @@
 [
  {
+  "titre": "Inside the Secretive, Contradictory World of Campaign Ads Funded by AI Super PACs",
+  "date": "2026-11-02",
+  "theme": "OSINT",
+  "source": "Bellingcat",
+  "resume": "Article à lire sur le site de la source.",
+  "lien": "https://www.bellingcat.com/news/2026/11/02/ai-super-pacs-political-advertising/"
+ },
+ {
+  "titre": "Synology warns of C3RB3R ransomware attacks targeting NAS devices",
+  "date": "2026-11-02",
+  "theme": "Ransomware",
+  "source": "BleepingComputer",
+  "resume": "Article à lire sur le site de la source.",
+  "lien": "https://www.bleepingcomputer.com/news/security/synology-warns-customers-of-ongoing-c3rb3r-ransomware-attacks/"
+ },
+ {
   "titre": "EU Satellite Imagery Delayed Over Gaza and Parts of West Bank by 24-hours",
   "date": "2026-10-29",
   "theme": "OSINT",
@@ -14,13 +30,5 @@
   "source": "Bellingcat",
   "resume": "Article à lire sur le site de la source.",
   "lien": "https://www.bellingcat.com/resources/2026/10/22/can-llms-supercharge-geolocations-our-tests-show-big-improvements-but-humans-remain-key/"
- },
- {
-  "titre": "Drive Specifications Matter (Complete)",
-  "date": "2026-10-18",
-  "theme": "OSINT",
-  "source": "IntelTechniques",
-  "resume": "Article à lire sur le site de la source.",
-  "lien": "https://inteltechniques.com/blog/posts/2026-10-18-drive-specifications-matter.html"
  }
 ]
