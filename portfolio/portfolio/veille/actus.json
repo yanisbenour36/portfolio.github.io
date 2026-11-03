@@ -1,19 +1,27 @@
 [
  {
+  "titre": "UK school estate hit by 3AM ransomware in suspected AI-assisted attack",
+  "date": "2026-11-03",
+  "theme": "Ransomware",
+  "source": "BleepingComputer",
+  "resume": "Article à lire sur le site de la source.",
+  "lien": "https://www.bleepingcomputer.com/news/security/uk-school-estate-hit-by-3am-ransomware-in-suspected-ai-assisted-attack/"
+ },
+ {
+  "titre": "Synology NAS Devices Targeted in Ransomware Attacks Exploiting Patched DSM Flaw",
+  "date": "2026-11-03",
+  "theme": "Ransomware",
+  "source": "The Hacker News",
+  "resume": "Article à lire sur le site de la source.",
+  "lien": "https://thehackernews.com/2026/11/synology-nas-devices-targeted-in.html"
+ },
+ {
   "titre": "Inside the Secretive, Contradictory World of Campaign Ads Funded by AI Super PACs",
   "date": "2026-11-02",
   "theme": "OSINT",
   "source": "Bellingcat",
   "resume": "Article à lire sur le site de la source.",
   "lien": "https://www.bellingcat.com/news/2026/11/02/ai-super-pacs-political-advertising/"
- },
- {
-  "titre": "Synology warns of C3RB3R ransomware attacks targeting NAS devices",
-  "date": "2026-11-02",
-  "theme": "Ransomware",
-  "source": "BleepingComputer",
-  "resume": "Article à lire sur le site de la source.",
-  "lien": "https://www.bleepingcomputer.com/news/security/synology-warns-customers-of-ongoing-c3rb3r-ransomware-attacks/"
  },
  {
   "titre": "EU Satellite Imagery Delayed Over Gaza and Parts of West Bank by 24-hours",
