@@ -1,13 +1,5 @@
 [
  {
-  "titre": "UK school estate hit by 3AM ransomware in suspected AI-assisted attack",
-  "date": "2026-11-03",
-  "theme": "Ransomware",
-  "source": "BleepingComputer",
-  "resume": "Article à lire sur le site de la source.",
-  "lien": "https://www.bleepingcomputer.com/news/security/uk-school-estate-hit-by-3am-ransomware-in-suspected-ai-assisted-attack/"
- },
- {
   "titre": "Synology NAS Devices Targeted in Ransomware Attacks Exploiting Patched DSM Flaw",
   "date": "2026-11-03",
   "theme": "Ransomware",
