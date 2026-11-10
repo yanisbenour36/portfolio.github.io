@@ -1,5 +1,21 @@
 [
  {
+  "titre": "Ransomware recovery is now a client retention metric",
+  "date": "2026-11-10",
+  "theme": "Ransomware",
+  "source": "BleepingComputer",
+  "resume": "Article à lire sur le site de la source.",
+  "lien": "https://www.bleepingcomputer.com/news/security/ransomware-recovery-is-now-a-client-retention-metric/"
+ },
+ {
+  "titre": "Vanderbilt University hit in BYOD ransomware attack, data theft claimed",
+  "date": "2026-11-09",
+  "theme": "Ransomware",
+  "source": "BleepingComputer",
+  "resume": "Article à lire sur le site de la source.",
+  "lien": "https://www.bleepingcomputer.com/news/security/vanderbilt-university-hit-in-byod-ransomware-attack-data-theft-claimed/"
+ },
+ {
   "titre": "How Online Maps Lay Bare the US Military Bases Targeted by Iran",
   "date": "2026-11-05",
   "theme": "OSINT",
