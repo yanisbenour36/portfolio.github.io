@@ -1,13 +1,5 @@
 [
  {
-  "titre": "Maersk confirms data breach as WhiteArmor ransomware demands $5 million",
-  "date": "2026-11-11",
-  "theme": "Ransomware",
-  "source": "BleepingComputer",
-  "resume": "Article à lire sur le site de la source.",
-  "lien": "https://www.bleepingcomputer.com/news/security/maersk-confirms-data-breach-as-whitearmor-ransomware-demands-5-million/"
- },
- {
   "titre": "How Online Maps Lay Bare the US Military Bases Targeted by Iran",
   "date": "2026-11-05",
   "theme": "OSINT",
