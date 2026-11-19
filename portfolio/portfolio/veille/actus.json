@@ -1,19 +1,35 @@
 [
  {
-  "titre": "Ransomware : un suspect d’INC et Lynx extradé",
-  "date": "2026-11-18",
+  "titre": "ThreatsDay: GPT-6.2 Jailbreak Flaws, BubbleLoader PNG Malware, $500M Ransom Demands + 17 More Stories",
+  "date": "2026-11-20",
   "theme": "Ransomware",
-  "source": "ZATAZ",
+  "source": "The Hacker News",
   "resume": "Article à lire sur le site de la source.",
-  "lien": "https://www.zataz.com/ransomware-un-suspect-dinc-et-lynx-extrade/"
+  "lien": "https://thehackernews.com/2026/11/threatsday-gpt-62-jailbreak-flaws.html"
  },
  {
-  "titre": "Ransomware Attacks Increase Behind AI, but Payments Decline",
-  "date": "2026-11-16",
+  "titre": "Five warning signs of ransomware breach before encryption or data theft",
+  "date": "2026-11-19",
   "theme": "Ransomware",
-  "source": "Dark Reading",
+  "source": "BleepingComputer",
   "resume": "Article à lire sur le site de la source.",
-  "lien": "https://www.darkreading.com/threat-intelligence/ransomware-attacks-increase-ai-payments-decline"
+  "lien": "https://www.bleepingcomputer.com/news/security/five-warning-signs-of-ransomware-breach-before-encryption-or-data-theft/"
+ },
+ {
+  "titre": "Nvidia Responds to Gentlemen Ransomware Claim",
+  "date": "2026-11-19",
+  "theme": "Ransomware",
+  "source": "SecurityWeek",
+  "resume": "Article à lire sur le site de la source.",
+  "lien": "https://www.securityweek.com/nvidia-responds-to-gentlemen-ransomware-claim/"
+ },
+ {
+  "titre": "UNREDACTED Magazine Issue 014",
+  "date": "2026-11-19",
+  "theme": "OSINT",
+  "source": "IntelTechniques",
+  "resume": "Article à lire sur le site de la source.",
+  "lien": "https://inteltechniques.com/blog/posts/unredacted014.html"
  },
  {
   "titre": "How Online Maps Lay Bare the US Military Bases Targeted by Iran",
@@ -30,13 +46,5 @@
   "source": "Bellingcat",
   "resume": "Article à lire sur le site de la source.",
   "lien": "https://www.bellingcat.com/news/2026/11/02/ai-super-pacs-political-advertising/"
- },
- {
-  "titre": "EU Satellite Imagery Delayed Over Gaza and Parts of West Bank by 24-hours",
-  "date": "2026-10-29",
-  "theme": "OSINT",
-  "source": "Bellingcat",
-  "resume": "Article à lire sur le site de la source.",
-  "lien": "https://www.bellingcat.com/news/2026/10/29/eu-satellite-imagery-delayed-over-gaza-and-parts-of-west-bank-by-24-hours/"
  }
 ]
