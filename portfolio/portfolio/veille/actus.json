@@ -8,14 +8,6 @@
   "lien": "https://thehackernews.com/2026/11/threatsday-gpt-62-jailbreak-flaws.html"
  },
  {
-  "titre": "Five warning signs of ransomware breach before encryption or data theft",
-  "date": "2026-11-19",
-  "theme": "Ransomware",
-  "source": "BleepingComputer",
-  "resume": "Article à lire sur le site de la source.",
-  "lien": "https://www.bleepingcomputer.com/news/security/five-warning-signs-of-ransomware-breach-before-encryption-or-data-theft/"
- },
- {
   "titre": "CISA Warns of 4 Exploited Flaws Linked to Ransomware, Cryptomining, and LLMjacking Attacks",
   "date": "2026-11-19",
   "theme": "Ransomware",
@@ -30,6 +22,14 @@
   "source": "IntelTechniques",
   "resume": "Article à lire sur le site de la source.",
   "lien": "https://inteltechniques.com/blog/posts/unredacted014.html"
+ },
+ {
+  "titre": "Ransomware Attacks Increase Behind AI, but Payments Decline",
+  "date": "2026-11-16",
+  "theme": "Ransomware",
+  "source": "Dark Reading",
+  "resume": "Article à lire sur le site de la source.",
+  "lien": "https://www.darkreading.com/threat-intelligence/ransomware-attacks-increase-ai-payments-decline"
  },
  {
   "titre": "How Online Maps Lay Bare the US Military Bases Targeted by Iran",
