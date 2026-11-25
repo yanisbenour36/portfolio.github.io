@@ -8,14 +8,6 @@
   "lien": "https://www.darkreading.com/cybersecurity-operations/alias-researcher-unmasked-ransomware-actors"
  },
  {
-  "titre": "Cyberattaque à Chambourcy : INC Ransom revendique l’attaque",
-  "date": "2026-11-23",
-  "theme": "Ransomware",
-  "source": "ZATAZ",
-  "resume": "Article à lire sur le site de la source.",
-  "lien": "https://www.zataz.com/cyberattaque-a-chambourcy-inc-ransom-revendique-lattaque/"
- },
- {
   "titre": "ThreatsDay: GPT-6.2 Jailbreak Flaws, BubbleLoader PNG Malware, $500M Ransom Demands + 17 More Stories",
   "date": "2026-11-20",
   "theme": "Ransomware",
@@ -30,6 +22,14 @@
   "source": "IntelTechniques",
   "resume": "Article à lire sur le site de la source.",
   "lien": "https://inteltechniques.com/blog/posts/unredacted014.html"
+ },
+ {
+  "titre": "Ransomware Attacks Increase Behind AI, but Payments Decline",
+  "date": "2026-11-16",
+  "theme": "Ransomware",
+  "source": "Dark Reading",
+  "resume": "Article à lire sur le site de la source.",
+  "lien": "https://www.darkreading.com/threat-intelligence/ransomware-attacks-increase-ai-payments-decline"
  },
  {
   "titre": "How Online Maps Lay Bare the US Military Bases Targeted by Iran",
